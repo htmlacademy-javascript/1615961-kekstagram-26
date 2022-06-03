@@ -17,14 +17,9 @@ getRandomInteger(1, 2);
 
 // Функция для проверки максимальной длины строки.
 
-function isCommentLengthOk(commentLength, maxCommentLength) {
-  const comment = 'test';
-  commentLength = comment.length;
-  if (commentLength <= maxCommentLength) {
-    return true;
-  } else {
-    return false;
-  }
+function isCommentLengthOk(comment, maxCommentLength) {
+  maxCommentLength = 140;
+  return (comment.length <= maxCommentLength);
 }
 
 isCommentLengthOk();
