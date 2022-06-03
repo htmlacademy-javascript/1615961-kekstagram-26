@@ -1,11 +1,13 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 
 function getRandomInteger(min, max) {
-  if (min >= max) {
-    return('Некорректный диапазон min и max');
+  if (min > max) {
+    const swap = min;
+    min = max;
+    max = swap;
   }
-  if (min < 0) {
-    return('Минимальное значение должно быть больше или равно нулю');
+  if (min < 0 || max < 0) {
+    new RangeError('Параметры должны быть больше нуля');
   }
   const random = min + Math.random() * (max + 1 - min);
   return Math.floor(random);
