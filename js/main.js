@@ -21,13 +21,16 @@ function isCommentLengthOk(comment, maxCommentLength = 140) {
 
 // Создание массива объектов с описанием фотографии
 
+const numberOfId = 26;
+const numberOfUrlId = 26;
+
 const ID = [];
-for (let i = 0; i < 26; i++) {
+for (let i = 0; i < numberOfId; i++) {
   ID[i] = i + 1;
 }
 
 const URL_ID = [];
-for (let i = 0; i < 26; i++) {
+for (let i = 0; i < numberOfUrlId; i++) {
   URL_ID[i] = i + 1;
 }
 
@@ -71,8 +74,10 @@ const commentAvatarArray = [
   6,
 ];
 
+const numberOfCommentId = 500;
+
 const COMMENT_ID = [];
-for (let i = 0; i < 500; i++) {
+for (let i = 0; i < numberOfCommentId; i++) {
   COMMENT_ID[i] = i + 1;
 }
 
@@ -100,5 +105,6 @@ const createPhotoDescription = function () {
   };
 };
 
-const similarPhotos = Array.from({length: 25}, createPhotoDescription);
+const numberOfArrayElements = 25;
+const similarPhotos = Array.from({length: numberOfArrayElements}, createPhotoDescription);
 console.log(similarPhotos);
