@@ -102,19 +102,21 @@ const createComment = function () {
 const COMMENTS_AMOUNT = 20;
 const similarComments = Array.from({length: COMMENTS_AMOUNT}, createComment);
 
+// Функция создания полного описания фотографии
 
 const createPhotoDescription = function () {
 
   const randomPhotoDescriptionIndex = getRandomInteger(0, PHOTO_DESCRIPTION.length - 1);
   ID.splice(0, 1);
   URL_ID.splice(0, 1);
+  similarComments.splice(0, 1);
 
   return {
     id: ID[0] - 1,
     url: `photos/${  URL_ID[0] - 1 }.jpg`,
     description: PHOTO_DESCRIPTION[randomPhotoDescriptionIndex],
     likes: getRandomInteger(15, 200),
-    comments: similarComments[1],
+    comments: similarComments[0],
   };
 };
 
