@@ -81,30 +81,43 @@ for (let i = 0; i < numberOfCommentId; i++) {
   COMMENT_ID[i] = i + 1;
 }
 
+// Функция создания комментария, затем создания массива из комментариев
+
+const createComment = function () {
+  COMMENT_ID.splice(0, 1);
+  const randomAvatarIndex = getRandomInteger(0, commentAvatarArray.length - 1);
+  const randomMessageIndex = getRandomInteger(0, MESSAGES.length - 1);
+  const randomNameIndex = getRandomInteger(0, NAMES.length - 1);
+
+  const comment = {
+    id: COMMENT_ID[0] - 1,
+    avatar: `img/avatar-${  commentAvatarArray[randomAvatarIndex]  }.svg`,
+    message: MESSAGES[randomMessageIndex],
+    name: NAMES[randomNameIndex],
+  };
+
+  return comment;
+};
+
+const COMMENTS_AMOUNT = 20;
+const similarComments = Array.from({length: COMMENTS_AMOUNT}, createComment);
+
+
 const createPhotoDescription = function () {
 
   const randomPhotoDescriptionIndex = getRandomInteger(0, PHOTO_DESCRIPTION.length - 1);
-  const randomNameIndex = getRandomInteger(0, NAMES.length - 1);
-  const randomMessageIndex = getRandomInteger(0, MESSAGES.length - 1);
-  const randomAvatarIndex = getRandomInteger(0, commentAvatarArray.length - 1);
   ID.splice(0, 1);
   URL_ID.splice(0, 1);
-  COMMENT_ID.splice(0, 1);
 
   return {
     id: ID[0] - 1,
     url: `photos/${  URL_ID[0] - 1 }.jpg`,
     description: PHOTO_DESCRIPTION[randomPhotoDescriptionIndex],
     likes: getRandomInteger(15, 200),
-    comments: {
-      id: COMMENT_ID[0] - 1,
-      avatar: `img/avatar-${  commentAvatarArray[randomAvatarIndex]  }.svg`,
-      message: MESSAGES[randomMessageIndex],
-      name: NAMES[randomNameIndex],
-    },
+    comments: similarComments[1],
   };
 };
 
-const numberOfArrayElements = 25;
-const similarPhotos = Array.from({length: numberOfArrayElements}, createPhotoDescription);
+const OFFERS_AMOUNT = 25;
+const similarPhotos = Array.from({length: OFFERS_AMOUNT}, createPhotoDescription);
 console.log(similarPhotos);
