@@ -17,22 +17,7 @@ function isCommentLengthOk(comment, maxCommentLength = 140) {
   return comment.length <= maxCommentLength;
 }
 
-// isCommentLengthOk();
-
 // Создание массива объектов с описанием фотографии
-
-const numberOfId = 26;
-const numberOfUrlId = 26;
-
-const ID = [];
-for (let i = 0; i < numberOfId; i++) {
-  ID[i] = i + 1;
-}
-
-const URL_ID = [];
-for (let i = 0; i < numberOfUrlId; i++) {
-  URL_ID[i] = i + 1;
-}
 
 const PHOTO_DESCRIPTION = [
   'Море',
@@ -74,52 +59,36 @@ const commentAvatarArray = [
   6,
 ];
 
-const numberOfCommentId = 500;
-
-const COMMENT_ID = [];
-for (let i = 0; i < numberOfCommentId; i++) {
-  COMMENT_ID[i] = i + 1;
-}
-
 // Функция создания комментария, затем создания массива из комментариев
 
-const createComment = function () {
-  COMMENT_ID.splice(0, 1);
-  const randomAvatarIndex = getRandomInteger(0, commentAvatarArray.length - 1);
-  const randomMessageIndex = getRandomInteger(0, MESSAGES.length - 1);
-  const randomNameIndex = getRandomInteger(0, NAMES.length - 1);
+const createComment = function (index) {
 
   const comment = {
-    id: COMMENT_ID[0] - 1,
-    avatar: `img/avatar-${  commentAvatarArray[randomAvatarIndex]  }.svg`,
-    message: MESSAGES[randomMessageIndex],
-    name: NAMES[randomNameIndex],
+    id: index + 1,
+    avatar: `img/avatar-${  commentAvatarArray[getRandomInteger(0, commentAvatarArray.length - 1)]  }.svg`,
+    message: MESSAGES[getRandomInteger(0, MESSAGES.length - 1)],
+    name: NAMES[getRandomInteger(0, NAMES.length - 1)],
   };
-
   return comment;
 };
 
-const COMMENTS_AMOUNT = 20;
-const similarComments = Array.from({length: COMMENTS_AMOUNT}, createComment);
+const COMMENTS_AMOUNT = 25;
+const similarComments = Array.from({length: COMMENTS_AMOUNT},  (_, index) => createComment(index));
 
-// Функция создания полного описания фотографии
+// Функция создания полного описания фотографии - затем массива - с характеристиками автора и комментария
 
-const createPhotoDescription = function () {
-
-  const randomPhotoDescriptionIndex = getRandomInteger(0, PHOTO_DESCRIPTION.length - 1);
-  ID.splice(0, 1);
-  URL_ID.splice(0, 1);
-  similarComments.splice(0, 1);
-
+const createPhotoDescription = function (index) {
+  const minLikes = 15;
+  const maxLikes = 200;
   return {
-    id: ID[0] - 1,
-    url: `photos/${  URL_ID[0] - 1 }.jpg`,
-    description: PHOTO_DESCRIPTION[randomPhotoDescriptionIndex],
-    likes: getRandomInteger(15, 200),
-    comments: similarComments[0],
+    id: index + 1,
+    url: `photos/${  index + 1 }.jpg`,
+    description: PHOTO_DESCRIPTION[getRandomInteger(0, PHOTO_DESCRIPTION.length - 1)],
+    likes: getRandomInteger(minLikes, maxLikes),
+    comments: similarComments[index],
   };
 };
 
-const OFFERS_AMOUNT = 25;
-const similarPhotos = Array.from({length: OFFERS_AMOUNT}, createPhotoDescription);
+const PHOTOS_AMOUNT = 25;
+const similarPhotos = Array.from({length: PHOTOS_AMOUNT}, (_, index) => createPhotoDescription(index));
 console.log(similarPhotos);
