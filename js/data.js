@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../js/utilites.js';
+import {getRandomInteger} from './utilites.js';
 
 // Создание массива объектов с описанием фотографии
 
