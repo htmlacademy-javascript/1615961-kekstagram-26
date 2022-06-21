@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../js/utilites.js';
+import {getRandomInteger} from './utilites.js';
 
 // Создание массива объектов с описанием фотографии
 
@@ -61,7 +61,7 @@ const createPhotoDescription = function (index) {
     url: `photos/${  index + 1 }.jpg`,
     description: PHOTO_DESCRIPTION[getRandomInteger(0, PHOTO_DESCRIPTION.length - 1)],
     likes: getRandomInteger(minLikes, maxLikes),
-    comments: similarComments[index],
+    comments: [similarComments[index]],
   };
 };
 
