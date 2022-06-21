@@ -61,7 +61,7 @@ const createPhotoDescription = function (index) {
     url: `photos/${  index + 1 }.jpg`,
     description: PHOTO_DESCRIPTION[getRandomInteger(0, PHOTO_DESCRIPTION.length - 1)],
     likes: getRandomInteger(minLikes, maxLikes),
-    comments: similarComments[index],
+    comments: [similarComments[index]],
   };
 };
 
