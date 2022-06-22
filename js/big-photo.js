@@ -11,16 +11,16 @@ const smallPicture = document.querySelectorAll('.picture');
 
 // Нажатие на миниаютюру выводит большое изображение, комментарии и лайки
 
-for (let i = 0; i < smallPicture.length; i++) {
-  smallPicture[i].addEventListener('click', ()=> {
-    bigPicture.classList.remove('hidden');
-    bigPictureImg.src = createPhotos()[i].url;
-    bigPictureLikes.textContent = createPhotos()[i].likes;
-    bigPictureDescription.textContent = createPhotos()[i].description;
-    bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-    bigPicture.querySelector('.comments-loader').classList.add('hidden');
-    document.querySelector('body').classList.add('modal-open');
-  });}
+// for (let i = 0; i < smallPicture.length; i++) {
+//   smallPicture[i].addEventListener('click', ()=> {
+//     bigPicture.classList.remove('hidden');
+//     bigPictureImg.src = createPhotos()[i].url;
+//     bigPictureLikes.textContent = createPhotos()[i].likes;
+//     bigPictureDescription.textContent = createPhotos()[i].description;
+//     bigPicture.querySelector('.social__comment-count').classList.add('hidden');
+//     bigPicture.querySelector('.comments-loader').classList.add('hidden');
+//     document.querySelector('body').classList.add('modal-open');
+//   });}
 
 // Закрытие большого изображения на кнопку или клавишу ESC
 
