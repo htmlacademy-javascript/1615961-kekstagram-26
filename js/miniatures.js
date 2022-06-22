@@ -13,4 +13,3 @@ similarPhotos.forEach((photo) => {
   similarListFragment.appendChild(photoElement);
 });
 containerPhotos.appendChild(similarListFragment);
-
