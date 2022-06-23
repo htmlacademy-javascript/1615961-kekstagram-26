@@ -31,11 +31,9 @@ for (let i = 0; i < smallPicture.length; i++) {
     bigPictureLikes.textContent = similarPhotos[i].likes;
     bigPictureDescription.textContent = similarPhotos[i].description;
     bigPictureCommentsCount.textContent = similarPhotos[i].comments.length;
-    // bigPictureComments.querySelector('.social__text').textContent = similarPhotos[i].comments[i].message;
-    // bigPictureComments.querySelector('.social__picture').src = similarPhotos[i].comments.avatar;
+    bigPictureComments.querySelector('.social__text').textContent = similarPhotos[i].comments[0].message;
+    bigPictureComments.querySelector('.social__picture').src = similarPhotos[i].comments[0].avatar;
     bigPicture.querySelector('.social__comment-count').classList.add('hidden');
     bigPicture.querySelector('.comments-loader').classList.add('hidden');
     document.querySelector('body').classList.add('modal-open');
   });}
-
-console.log(similarPhotos);
