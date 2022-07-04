@@ -17,4 +17,10 @@ function isCommentLengthOk(comment, maxCommentLength = 140) {
   return comment.length <= maxCommentLength;
 }
 
-export {getRandomInteger};
+// Функция для проверки нажатия Esc.
+
+function isEscapeKey (evt) {
+  return evt.key === 'Escape';
+}
+
+export {getRandomInteger, isEscapeKey};
