@@ -23,10 +23,14 @@ function onFormEscKeydown () {
     if (uploadImageDescription === document.activeElement) {
       return evt;
     } else {
-      if (evt.keyCode === 27) {
-        evt.preventDefault();
-        uploadImageForm.classList.add('hidden');
-        document.querySelector('body').classList.remove('modal-open');
+      if (uploadImageHashtags === document.activeElement) {
+        return evt;
+      } else {
+        if (evt.keyCode === 27) {
+          evt.preventDefault();
+          uploadImageForm.classList.add('hidden');
+          document.querySelector('body').classList.remove('modal-open');
+        }
       }
     }
   });
