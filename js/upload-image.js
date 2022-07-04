@@ -20,10 +20,14 @@ function CloseForm () {
 
 function onFormEscKeydown () {
   document.addEventListener ('keydown', (evt) => {
-    if (evt.keyCode === 27) {
-      evt.preventDefault();
-      uploadImageForm.classList.add('hidden');
-      document.querySelector('body').classList.remove('modal-open');
+    if (uploadImageDescription === document.activeElement) {
+      return evt;
+    } else {
+      if (evt.keyCode === 27) {
+        evt.preventDefault();
+        uploadImageForm.classList.add('hidden');
+        document.querySelector('body').classList.remove('modal-open');
+      }
     }
   });
 }
