@@ -1,10 +1,12 @@
+import {isEscapeKey} from './utilites.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = document.querySelector('.big-picture__cancel');
 
 // Закрытие большого изображения на кнопку или клавишу ESC
 
 function onBigPictureEscKeydown (evt) {
-  if (evt.keyCode === 27) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
     document.querySelector('body').classList.remove('modal-open');

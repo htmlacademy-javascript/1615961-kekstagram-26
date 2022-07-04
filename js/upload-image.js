@@ -1,5 +1,7 @@
 const uploadImage = document.querySelector('#upload-file');
 const uploadImageForm = document.querySelector('.img-upload__overlay');
+const uploadImageDescription = document.querySelector('.text__description');
+const uploadImageHashtags = document.querySelector('.text__hashtags');
 
 const uploadImageClose = document.querySelector('#upload-cancel');
 
@@ -11,6 +13,9 @@ function OpenForm () {
 function CloseForm () {
   uploadImageForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
+  uploadImage.value = '';
+  uploadImageDescription.textContent='';
+  uploadImageHashtags.textContent = '';
 }
 
 function onFormEscKeydown () {
@@ -18,6 +23,7 @@ function onFormEscKeydown () {
     if (evt.keyCode === 27) {
       evt.preventDefault();
       uploadImageForm.classList.add('hidden');
+      document.querySelector('body').classList.remove('modal-open');
     }
   });
 }
@@ -32,4 +38,7 @@ uploadImageClose.addEventListener('click', () => {
 
 document.addEventListener('keydown', (evt)=> {
   onFormEscKeydown(evt);
+  uploadImage.value = '';
+  uploadImageDescription.textContent = '';
+  uploadImageHashtags.textContent = '';
 });
