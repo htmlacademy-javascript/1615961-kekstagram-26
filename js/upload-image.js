@@ -5,10 +5,12 @@ const uploadImageClose = document.querySelector('#upload-cancel');
 
 function OpenForm () {
   uploadImageForm.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
 }
 
 function CloseForm () {
   uploadImageForm.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
 }
 
 function onFormEscKeydown () {
