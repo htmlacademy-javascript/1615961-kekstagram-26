@@ -1,3 +1,5 @@
+import {isEscapeKey} from './utilites.js';
+
 const uploadImage = document.querySelector('#upload-file');
 const uploadImageForm = document.querySelector('.img-upload__overlay');
 const uploadImageDescription = document.querySelector('.text__description');
@@ -25,7 +27,7 @@ function onFormEscKeydown (evt) {
     if (uploadImageHashtags === document.activeElement) {
       return evt;
     } else {
-      if (evt.keyCode === 27) {
+      if (isEscapeKey(evt)) {
         evt.preventDefault();
         CloseForm ();
       }
