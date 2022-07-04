@@ -14,26 +14,23 @@ function CloseForm () {
   uploadImageForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   uploadImage.value = '';
-  uploadImageDescription.textContent='';
-  uploadImageHashtags.textContent = '';
+  uploadImageDescription.value ='';
+  uploadImageHashtags.value = '';
 }
 
-function onFormEscKeydown () {
-  document.addEventListener ('keydown', (evt) => {
-    if (uploadImageDescription === document.activeElement) {
+function onFormEscKeydown (evt) {
+  if (uploadImageDescription === document.activeElement) {
+    return evt;
+  } else {
+    if (uploadImageHashtags === document.activeElement) {
       return evt;
     } else {
-      if (uploadImageHashtags === document.activeElement) {
-        return evt;
-      } else {
-        if (evt.keyCode === 27) {
-          evt.preventDefault();
-          uploadImageForm.classList.add('hidden');
-          document.querySelector('body').classList.remove('modal-open');
-        }
+      if (evt.keyCode === 27) {
+        evt.preventDefault();
+        CloseForm ();
       }
     }
-  });
+  }
 }
 
 uploadImage.addEventListener('change', () => {
@@ -46,7 +43,4 @@ uploadImageClose.addEventListener('click', () => {
 
 document.addEventListener('keydown', (evt)=> {
   onFormEscKeydown(evt);
-  uploadImage.value = '';
-  uploadImageDescription.textContent = '';
-  uploadImageHashtags.textContent = '';
 });

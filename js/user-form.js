@@ -1,4 +1,5 @@
 const form = document.querySelector('.img-upload__form');
+const uploadButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -10,9 +11,7 @@ form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+  if (!isValid) {
+    uploadButton.disabled = true;
   }
 });
