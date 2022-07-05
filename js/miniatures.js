@@ -1,4 +1,5 @@
 import {createPhotos} from './data.js';
+import {onBigPictureEscKeydown} from './big-photo.js';
 
 const containerPhotos = document.querySelector('.pictures');
 const similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -26,6 +27,7 @@ const smallPicture = document.querySelectorAll('.picture');
 
 for (let i = 0; i < smallPicture.length; i++) {
   smallPicture[i].addEventListener('click', ()=> {
+    document.addEventListener('keydown', onBigPictureEscKeydown);
     bigPicture.classList.remove('hidden');
     bigPictureImg.src = similarPhotos[i].url;
     bigPictureLikes.textContent = similarPhotos[i].likes;

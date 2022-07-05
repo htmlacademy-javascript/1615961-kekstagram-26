@@ -5,19 +5,21 @@ const bigPictureClose = document.querySelector('.big-picture__cancel');
 
 // Закрытие большого изображения на кнопку или клавишу ESC
 
+function closeBigPicture () {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onBigPictureEscKeydown);
+}
+
 function onBigPictureEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+    closeBigPicture();
   }
 }
 
 bigPictureClose.addEventListener('click', ()=> {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  closeBigPicture();
 });
 
-document.addEventListener('keydown', (evt) => {
-  onBigPictureEscKeydown(evt);
-});
+export {onBigPictureEscKeydown};
