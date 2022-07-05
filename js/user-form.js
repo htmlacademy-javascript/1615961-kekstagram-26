@@ -7,15 +7,6 @@ const pristine = new Pristine(form, {
   errorTextClass: 'error-text',
 });
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  const isValid = pristine.validate();
-  if (!isValid) {
-    uploadButton.disabled = true;
-  }
-});
-
 // валидация хэштегов
 
 const hashtagsField = document.querySelector('.text__hashtags');
@@ -24,7 +15,7 @@ const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const validateHashtagValue = function (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (re.test(arrayElement)) {
+    if (re.test(arrayElement) || arrayElement === '') {
       return true;
     }
   } return false;
@@ -58,5 +49,14 @@ const validateNotSameHashtags = function (value) {
 
 pristine.addValidator(hashtagsField, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
 pristine.addValidator(hashtagsField, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
-pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки', false);
+pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
 pristine.addValidator(hashtagsField, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
+
+form.addEventListener('change', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (!isValid) {
+    uploadButton.disabled = true;
+  }
+});
