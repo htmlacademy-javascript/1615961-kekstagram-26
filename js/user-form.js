@@ -1,5 +1,4 @@
 const form = document.querySelector('.img-upload__form');
-const uploadButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -11,7 +10,7 @@ const pristine = new Pristine(form, {
 
 const hashtagsField = document.querySelector('.text__hashtags');
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-// /.#/ - проверка на пробелы между хт
+
 const validateHashtagValue = function (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
@@ -22,9 +21,10 @@ const validateHashtagValue = function (value) {
 };
 
 const validateHashtagLength = function (value) {
+  const maxHastagLength = 20;
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (arrayElement.length <= 20) {
+    if (arrayElement.length <= maxHastagLength) {
       return true;
     }
   } return false;
@@ -47,12 +47,13 @@ const validateNotSameHashtags = function (value) {
   } return true;
 };
 
-const validateNotSameCASELOWER = function (value) {
-  // unblockButton(value);
+const validateNotSameInLowerCase = function (value) {
   const array = value.split(' ');
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === array[i].toLowerCase) {
-      return false;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i].toLowerCase === array[j].toLowerCase) {
+        return false;
+      }
     }
   } return true;
 };
@@ -61,22 +62,14 @@ pristine.addValidator(hashtagsField, validateHashtagLength, 'максималь�
 pristine.addValidator(hashtagsField, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
 pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки', false);
 pristine.addValidator(hashtagsField, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
-
-
-uploadButton.disabled = true;
-
-
-// function ublockButton (value) {
-
-//   uploadButton.disabled = !(validateNotSameHashtags(value) && (validateNotSameHashtags(value))
-// }
-
+pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом');
 
 form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
   const isValid = pristine.validate();
   if (!isValid) {
-    uploadButton.disabled = true;
+    evt.preventDefault();
+  }
+  else {
+    return evt;
   }
 });
