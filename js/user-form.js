@@ -51,7 +51,7 @@ const validateNotSameInLowerCase = function (value) {
   const array = value.split(' ');
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
-      if (array[i].toLowerCase === array[j].toLowerCase) {
+      if (array[i].toLowerCase() === array[j].toLowerCase()) {
         return false;
       }
     }
