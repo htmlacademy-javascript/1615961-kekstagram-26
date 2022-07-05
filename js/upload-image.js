@@ -7,42 +7,36 @@ const uploadImageHashtags = document.querySelector('.text__hashtags');
 
 const uploadImageClose = document.querySelector('#upload-cancel');
 
-function OpenForm () {
+function openForm () {
   uploadImageForm.classList.remove('hidden');
-  document.querySelector('body').classList.add('modal-open');
+  document.body.classList.add('modal-open');
 }
 
-function CloseForm () {
+function closeForm () {
   uploadImageForm.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   uploadImage.value = '';
   uploadImageDescription.value ='';
   uploadImageHashtags.value = '';
+  document.removeEventListener('keydown', onFormEscKeydown);
 }
 
 function onFormEscKeydown (evt) {
-  if (uploadImageDescription === document.activeElement) {
+  if (uploadImageDescription === document.activeElement || uploadImageHashtags === document.activeElement) {
     return evt;
   } else {
-    if (uploadImageHashtags === document.activeElement) {
-      return evt;
-    } else {
-      if (isEscapeKey(evt)) {
-        evt.preventDefault();
-        CloseForm ();
-      }
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      closeForm ();
     }
   }
 }
 
 uploadImage.addEventListener('change', () => {
-  OpenForm();
+  openForm();
+  document.addEventListener('keydown', onFormEscKeydown);
 });
 
 uploadImageClose.addEventListener('click', () => {
-  CloseForm();
-});
-
-document.addEventListener('keydown', (evt)=> {
-  onFormEscKeydown(evt);
+  closeForm();
 });

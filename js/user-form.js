@@ -11,7 +11,7 @@ const pristine = new Pristine(form, {
 
 const hashtagsField = document.querySelector('.text__hashtags');
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-
+// /.#/ - проверка на пробелы между хт
 const validateHashtagValue = function (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
@@ -47,12 +47,32 @@ const validateNotSameHashtags = function (value) {
   } return true;
 };
 
+const validateNotSameCASELOWER = function (value) {
+  // unblockButton(value);
+  const array = value.split(' ');
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === array[i].toLowerCase) {
+      return false;
+    }
+  } return true;
+};
+
 pristine.addValidator(hashtagsField, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
 pristine.addValidator(hashtagsField, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
-pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
+pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки', false);
 pristine.addValidator(hashtagsField, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
 
-form.addEventListener('change', (evt) => {
+
+uploadButton.disabled = true;
+
+
+// function ublockButton (value) {
+
+//   uploadButton.disabled = !(validateNotSameHashtags(value) && (validateNotSameHashtags(value))
+// }
+
+
+form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();

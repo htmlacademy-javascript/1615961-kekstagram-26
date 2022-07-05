@@ -9,15 +9,15 @@ function onBigPictureEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     bigPicture.classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
   }
 }
 
 bigPictureClose.addEventListener('click', ()=> {
   bigPicture.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
 });
 
-document.addEventListener('keydown', (evt)=> {
+document.addEventListener('keydown', (evt) => {
   onBigPictureEscKeydown(evt);
 });
