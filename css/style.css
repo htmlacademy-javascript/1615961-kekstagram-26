@@ -578,12 +578,7 @@ main {
 }
 
 .effect-level__value {
-  display: block;
-  position: absolute;
-  margin-left: 100px;
-  margin-top: -10px;
-  z-index: 10;
-  color:#000000;
+  display: none;
 }
 
 
