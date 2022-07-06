@@ -4,3 +4,4 @@ import './miniatures.js';
 import './big-photo.js';
 import './upload-image.js';
 import './user-form.js';
+import './scale.js';
