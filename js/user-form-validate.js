@@ -69,17 +69,33 @@ pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-тег�
 
 // Отправка формы
 
+const submitButton = document.querySelector('.img-upload__submit');
+
+const blockSubmitButton = function () {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю..';
+};
+
+const unblockSubmitButton = function () {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
-    if (!isValid) {
-      evt.preventDefault();
-    }
-    else {
+    if (isValid) {
+      blockSubmitButton();
       sendData(
-        () => onSuccess(),
-        () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+        () => {
+          onSuccess();
+          unblockSubmitButton();
+        },
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          unblockSubmitButton();
+        },
         new FormData(evt.target),
       );
     }
