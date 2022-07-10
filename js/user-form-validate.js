@@ -69,6 +69,7 @@ pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-тег�
 
 // Отправка формы
 
+
 const submitButton = document.querySelector('.img-upload__submit');
 
 const blockSubmitButton = function () {
@@ -80,6 +81,15 @@ const unblockSubmitButton = function () {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
 };
+
+form.addEventListener('input', () => {
+  const isValid = pristine.validate();
+  if (!isValid) {
+    submitButton.disabled = true;
+  } else {
+    submitButton.disabled = false;
+  }
+});
 
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
