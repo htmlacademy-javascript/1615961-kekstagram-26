@@ -7,13 +7,10 @@ import {setUserFormSubmit} from './user-form-validate.js';
 import './scale.js';
 import './photo-effects.js';
 import {closeForm} from './user-form.js';
+import {getData} from './api.js';
 
-
-fetch('https://26.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
-  .then((photos) => {
-    renderPhotos(photos);
-  }
-  );
+getData((photos) => {
+  renderPhotos(photos);
+});
 
 setUserFormSubmit(closeForm);
