@@ -20,8 +20,6 @@ const renderPhotos = (photos) => {
     photoElement.addEventListener('click', () => {
       document.addEventListener('keydown', onBigPictureEscKeydown);
       bigPicture.classList.remove('hidden');
-      // bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-      // bigPicture.querySelector('.comments-loader').classList.add('hidden');
       document.querySelector('body').classList.add('modal-open');
       bigPictureImg.src = url;
       bigPictureLikes.textContent = likes;
