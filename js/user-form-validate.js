@@ -106,6 +106,7 @@ const setUserFormSubmit = (onSuccess) => {
         () => {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
           unblockSubmitButton();
+          openErrorMessage();
         },
         new FormData(evt.target),
       );
@@ -139,5 +140,26 @@ function closeSuccessMessage() {
 
 // Блок с сообщениями об ошибке отправки формы
 //
-//
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+const errorCloseButton = errorTemplate.querySelector('.error__button');
+
+function onErrorMessageEscKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeErrorMessage();
+  }
+}
+
+function openErrorMessage () {
+  document.body.appendChild(errorTemplate);
+  document.addEventListener('keydown', onErrorMessageEscKeydown);
+  errorCloseButton.addEventListener('click', closeErrorMessage);
+  errorTemplate.style.zIndex =  '100';
+}
+
+function closeErrorMessage() {
+  document.body.removeChild(errorTemplate);
+  document.removeEventListener('keydown', onErrorMessageEscKeydown);
+}
+
 export {setUserFormSubmit};
