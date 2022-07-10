@@ -1,4 +1,4 @@
-import {showAlert} from './utilites.js';
+import {isEscapeKey, showAlert} from './utilites.js';
 import {sendData} from './api.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -101,6 +101,7 @@ const setUserFormSubmit = (onSuccess) => {
         () => {
           onSuccess();
           unblockSubmitButton();
+          openSuccessMessage();
         },
         () => {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
@@ -112,4 +113,31 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
+
+// Блок с сообщениями об успехе отправки формы
+
+const successTemplate = document.querySelector('#success').content.querySelector('.success');
+const successCloseButton = successTemplate.querySelector('.success__button');
+
+function onSuccessEscKeydown (evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeSuccessMessage();
+  }
+}
+
+function openSuccessMessage () {
+  document.body.appendChild(successTemplate);
+  document.addEventListener('keydown', onSuccessEscKeydown);
+  successCloseButton.addEventListener('click', closeSuccessMessage);
+}
+
+function closeSuccessMessage() {
+  document.body.removeChild(successTemplate);
+  document.removeEventListener('keydown', onSuccessEscKeydown);
+}
+
+// Блок с сообщениями об ошибке отправки формы
+//
+//
 export {setUserFormSubmit};
