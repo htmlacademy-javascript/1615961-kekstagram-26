@@ -1,3 +1,5 @@
+import {showAlert} from './utilites.js';
+
 const addressGetServer = 'https://26.javascript.pages.academy/kekstagram/data';
 const addressPostServer = 'https://26.javascript.pages.academy/kekstagram';
 
@@ -6,6 +8,9 @@ const getData = (onSuccess) => {
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
+    })
+    .catch(() => {
+      showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
     });
 };
 
