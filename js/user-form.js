@@ -41,4 +41,4 @@ uploadImageClose.addEventListener('click', () => {
   closeForm();
 });
 
-export {closeForm, openForm};
+export {closeForm, openForm, onFormEscKeydown};

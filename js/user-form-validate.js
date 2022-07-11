@@ -1,5 +1,6 @@
 import {isEscapeKey, showAlert} from './utilites.js';
 import {sendData} from './api.js';
+import {onFormEscKeydown} from './user-form.js';
 
 const form = document.querySelector('.img-upload__form');
 
@@ -127,19 +128,29 @@ function onSuccessEscKeydown (evt) {
   }
 }
 
+// Не понимаю, почему эта функция работает, по-моему там должно быть !==
+
+function onSuccesMessageClickAround (evt) {
+  if (evt.target === successTemplate) {
+    closeSuccessMessage();
+  }
+}
+
 function openSuccessMessage () {
   document.body.appendChild(successTemplate);
   document.addEventListener('keydown', onSuccessEscKeydown);
   successCloseButton.addEventListener('click', closeSuccessMessage);
+  document.addEventListener('click', onSuccesMessageClickAround);
 }
 
 function closeSuccessMessage() {
   document.body.removeChild(successTemplate);
   document.removeEventListener('keydown', onSuccessEscKeydown);
+  document.removeEventListener('click', onSuccesMessageClickAround);
 }
 
 // Блок с сообщениями об ошибке отправки формы
-//
+
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const errorCloseButton = errorTemplate.querySelector('.error__button');
 
@@ -150,16 +161,26 @@ function onErrorMessageEscKeydown (evt) {
   }
 }
 
+function onErrorMessageClickAround (evt) {
+  if (evt.target === errorTemplate) {
+    closeErrorMessage();
+  }
+}
+
 function openErrorMessage () {
   document.body.appendChild(errorTemplate);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
   errorCloseButton.addEventListener('click', closeErrorMessage);
   errorTemplate.style.zIndex =  '100';
+  document.addEventListener('click', onErrorMessageClickAround);
+  document.removeEventListener('keydown', onFormEscKeydown);
 }
 
 function closeErrorMessage() {
   document.body.removeChild(errorTemplate);
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
+  document.removeEventListener('click', onErrorMessageClickAround);
+  document.addEventListener('keydown', onFormEscKeydown);
 }
 
 export {setUserFormSubmit};
