@@ -13,7 +13,7 @@ const bigPictureCommentsCount = bigPicture.querySelector('.comments-count');
 
 const commentElementTemplate = document.querySelector('#social__comment').content.querySelector('.social__comment');
 
-const renderPhotos = (photos) => {
+const renderPhotos = function (photos) {
   photos.forEach(({url, likes, comments, description}) => {
     const photoElement = similarPhotoTemplate.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
@@ -29,7 +29,6 @@ const renderPhotos = (photos) => {
       bigPictureDescription.textContent = description;
       bigPictureCommentsCount.textContent = comments.length;
       bigPictureCommentsList.innerHTML = '';
-      console.log(comments);
 
       comments.forEach(({avatar, message, name}) => {
         const commentElement = commentElementTemplate.cloneNode(true);
