@@ -9,6 +9,7 @@ const bigPictureLikes = bigPicture.querySelector('.likes-count');
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
 const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
 const bigPictureCommentsCount = bigPicture.querySelector('.comments-count');
+// const bigPictureCommentsCounter = bigPicture.querySelector('.social__comment-count');
 
 const commentElementTemplate = document.querySelector('#social__comment').content.querySelector('.social__comment');
 
@@ -30,11 +31,12 @@ const renderPhotos = (photos) => {
       bigPictureCommentsList.innerHTML = '';
       console.log(comments);
 
-      comments.forEach(({avatar, message}) => {
+      comments.forEach(({avatar, message, name}) => {
         const commentElement = commentElementTemplate.cloneNode(true);
         bigPictureCommentsList.appendChild(commentElement);
         commentElement.querySelector('.social__text').textContent = message;
         commentElement.querySelector('.social__picture').src = avatar;
+        commentElement.querySelector('.social__picture').alt = name;
       });
     });
   });
