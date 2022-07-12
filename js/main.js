@@ -8,9 +8,11 @@ import './scale.js';
 import './photo-effects.js';
 import {closeForm} from './user-form.js';
 import {getData} from './api.js';
+import {showImageFilters} from './filter.js';
 
 getData((photos) => {
   renderPhotos(photos);
+  showImageFilters();
 });
 
 setUserFormSubmit(closeForm);
