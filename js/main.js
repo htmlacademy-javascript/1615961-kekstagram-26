@@ -8,17 +8,20 @@ import './scale.js';
 import './photo-effects.js';
 import {closeForm} from './user-form.js';
 import {getData} from './api.js';
-import {showImageFilters} from './filter.js';
+import {showImageFilters, filterByTopCommented, filterPhotos} from './filter.js';
 
 // getData((photos) => {
 //   renderPhotos(photos);
 //   console.log(photos);
+//   const filteredPhotos = photos.slice(0, 10);
+//   console.log(filteredPhotos);
 //   setTimeout(showImageFilters, 1000);
 // });
 
 function onSuccess (photos) {
-  renderPhotos(photos);
   // вызов filters ();
+  filterPhotos(photos);
+  renderPhotos(photos);
   console.log(photos);
   showImageFilters();
 }

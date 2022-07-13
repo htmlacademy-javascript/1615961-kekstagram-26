@@ -9,7 +9,7 @@ const getData = (onSuccess) => {
     .then((photos) => {
       onSuccess(photos);
 
-      // Фильтыр писать сюда
+      // Фильтры писать сюда
     })
     .catch(() => {
       showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
