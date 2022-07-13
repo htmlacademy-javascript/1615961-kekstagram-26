@@ -13,19 +13,15 @@ import {showImageFilters} from './filter.js';
 // getData((photos) => {
 //   renderPhotos(photos);
 //   console.log(photos);
-//   const filteredPhotos = photos.slice(0, 10);
-//   console.log(filteredPhotos);
 //   setTimeout(showImageFilters, 1000);
 // });
 
-const onSuccess = function (photos) {
+function onSuccess (photos) {
   renderPhotos(photos);
   // вызов filters ();
   console.log(photos);
-  const filteredPhotos = photos.slice(0, 10);
-  console.log(filteredPhotos);
   showImageFilters();
-};
+}
 
 getData(onSuccess);
 
