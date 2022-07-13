@@ -8,6 +8,8 @@ const getData = (onSuccess) => {
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
+
+      // Фильтыр писать сюда
     })
     .catch(() => {
       showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
