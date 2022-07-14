@@ -1,22 +1,3 @@
-// Функция, возвращающая случайное целое число из переданного диапазона включительно.
-
-function getRandomInteger(min, max) {
-  if (min > max) {
-    [min, max] = [max, min];
-  }
-  if (min < 0 || max < 0) {
-    throw new RangeError('Параметры должны быть больше нуля');
-  }
-  const random = min + Math.random() * (max + 1 - min);
-  return Math.floor(random);
-}
-
-// Функция для проверки нажатия Esc.
-
-function isEscapeKey (evt) {
-  return evt.key === 'Escape';
-}
-
 // Функция ошибки, если фетч не смог выполниться
 
 const ALERT_SHOW_TIME = 5000;
@@ -41,6 +22,25 @@ const showAlert = function (message) {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
+
+// Функция, возвращающая случайное целое число из переданного диапазона включительно.
+
+function getRandomInteger(min, max) {
+  if (min > max) {
+    [min, max] = [max, min];
+  }
+  if (min < 0 || max < 0) {
+    throw new RangeError('Параметры должны быть больше нуля');
+  }
+  const random = min + Math.random() * (max + 1 - min);
+  return Math.floor(random);
+}
+
+// Функция для проверки нажатия Esc.
+
+function isEscapeKey (evt) {
+  return evt.key === 'Escape';
+}
 
 // Функция debounce для устранения дребезга.
 

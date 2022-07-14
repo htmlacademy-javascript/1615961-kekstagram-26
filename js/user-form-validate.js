@@ -119,7 +119,7 @@ const setUserFormSubmit = (onSuccess) => {
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const successCloseButton = successTemplate.querySelector('.success__button');
 
-function onSuccessEscKeydown (evt) {
+function onSuccessMessageEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeSuccessMessage();
@@ -134,14 +134,14 @@ function onSuccesMessageClickAround (evt) {
 
 function openSuccessMessage () {
   document.body.appendChild(successTemplate);
-  document.addEventListener('keydown', onSuccessEscKeydown);
+  document.addEventListener('keydown', onSuccessMessageEscKeydown);
   successCloseButton.addEventListener('click', closeSuccessMessage);
   document.addEventListener('click', onSuccesMessageClickAround);
 }
 
 function closeSuccessMessage() {
   document.body.removeChild(successTemplate);
-  document.removeEventListener('keydown', onSuccessEscKeydown);
+  document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   document.removeEventListener('click', onSuccesMessageClickAround);
 }
 
