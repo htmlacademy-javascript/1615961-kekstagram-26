@@ -95,4 +95,14 @@ function throttle (callback, delayBetweenFrames) {
   };
 }
 
-export {getRandomInteger, isEscapeKey, showAlert, throttle, debounce};
+// Функция тасовки массива
+
+function shuffle(photos) {
+  for (let i = photos.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [photos[i], photos[j]] = [photos[j], photos[i]];
+  }
+  return photos;
+}
+
+export {getRandomInteger, isEscapeKey, showAlert, throttle, debounce, shuffle};

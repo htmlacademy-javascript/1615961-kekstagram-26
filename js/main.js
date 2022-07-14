@@ -8,7 +8,7 @@ import './scale.js';
 import './photo-effects.js';
 import {closeForm} from './user-form.js';
 import {getData} from './api.js';
-import {showImageFilters, filterByTopCommented, filterPhotos} from './filter.js';
+import {showImageFilters, addSortButtonListeners} from './filter.js';
 
 // getData((photos) => {
 //   renderPhotos(photos);
@@ -19,10 +19,9 @@ import {showImageFilters, filterByTopCommented, filterPhotos} from './filter.js'
 // });
 
 function onSuccess (photos) {
-  // вызов filters ();
-  filterPhotos(photos);
   renderPhotos(photos);
-  console.log(photos);
+  addSortButtonListeners(photos);
+  // console.log(photos);
   showImageFilters();
 }
 

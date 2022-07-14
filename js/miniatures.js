@@ -9,7 +9,7 @@ function renderPhotos (photos) {
     photoElement.querySelector('.picture__img').src = url;
     photoElement.querySelector('.picture__likes').textContent = likes;
     photoElement.querySelector('.picture__comments').textContent = comments.length;
-    containerPhotos.appendChild(photoElement);
+    containerPhotos.append(photoElement);
 
     photoElement.addEventListener('click',() => {showBigPicture(url, likes, comments, description);
     });
