@@ -1,15 +1,22 @@
+import {showAlert} from './utilites.js';
+
+const addressGetServer = 'https://26.javascript.pages.academy/kekstagram/data';
+const addressPostServer = 'https://26.javascript.pages.academy/kekstagram';
+
 const getData = (onSuccess) => {
-  fetch('https://26.javascript.pages.academy/kekstagram/data')
+  fetch(addressGetServer)
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
-    }
-    );
+    })
+    .catch(() => {
+      showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
+    });
 };
 
 const sendData = (onSuccess, onFail, body) => {
 
-  fetch('https://26.javascript.pages.academy/kekstagram',
+  fetch(addressPostServer,
     {
       method: 'POST',
       body,

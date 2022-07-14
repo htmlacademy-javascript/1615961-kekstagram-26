@@ -41,4 +41,22 @@ uploadImageClose.addEventListener('click', () => {
   closeForm();
 });
 
-export {closeForm, openForm};
+// Блок с подстановкой выбранного изображения
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
+
+const fileChooser = document.querySelector('.img-upload__input');
+const previewPhoto = document.querySelector('.img-upload__preview-picture');
+
+fileChooser.addEventListener('change', () => {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    previewPhoto.src = URL.createObjectURL(file);
+  }
+});
+
+export {closeForm, openForm, onFormEscKeydown};
