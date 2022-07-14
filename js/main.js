@@ -1,4 +1,3 @@
-import {createPhotos} from './data.js';
 import {getRandomInteger, isEscapeKey, debounce} from './utilites.js';
 import {renderPhotos} from './miniatures.js';
 import './big-photo.js';
