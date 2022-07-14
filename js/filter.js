@@ -5,6 +5,13 @@ function showImageFilters () {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 }
 
+function clearOldPhotos () {
+  const pictures = document.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picture.remove();
+  });
+}
+
 const defaultFilterButton = document.querySelector('#filter-default');
 const discussedFilterButton = document.querySelector('#filter-discussed');
 const randomFilterButton = document.querySelector('#filter-random');
@@ -31,8 +38,21 @@ function filterByRandom (photos) {
 }
 
 function filterByDefault (photos) {
-  renderPhotos(photos);
+  for (let i = 0; i <= photos.length - 2; i++) {
+    let minId = photos[i].id;
+    for (let j = i + 1; j <= photos.length - 1; j++) {
+      if (photos[j].id < minId) {
+        minId = photos[j].id;
+        const swap = photos[i];
+        photos[i] = photos[j];
+        photos[j] = swap;
+      }
+    }
+  }
+  const sortedPhotos = photos;
+  renderPhotos(sortedPhotos);
 }
+
 
 function addSortButtonListeners (photos) {
 
@@ -40,6 +60,7 @@ function addSortButtonListeners (photos) {
     defaultFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.remove('img-filters__button--active');
     discussedFilterButton.classList.add('img-filters__button--active');
+    clearOldPhotos();
     filterByTopCommented(photos);
   });
 
@@ -47,6 +68,7 @@ function addSortButtonListeners (photos) {
     discussedFilterButton.classList.remove('img-filters__button--active');
     defaultFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.add('img-filters__button--active');
+    clearOldPhotos();
     filterByRandom(photos);
   });
 
@@ -54,6 +76,7 @@ function addSortButtonListeners (photos) {
     discussedFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.remove('img-filters__button--active');
     defaultFilterButton.classList.add('img-filters__button--active');
+    clearOldPhotos();
     filterByDefault(photos);
   });
 }
