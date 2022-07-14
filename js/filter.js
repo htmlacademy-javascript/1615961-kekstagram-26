@@ -1,5 +1,5 @@
 import {renderPhotos} from './miniatures.js';
-import {shuffle} from './utilites.js';
+import {shuffle, debounce} from './utilites.js';
 
 function showImageFilters () {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
@@ -56,28 +56,34 @@ function filterByDefault (photos) {
 
 function addSortButtonListeners (photos) {
 
+  discussedFilterButton.addEventListener('click', debounce(() => {
+    clearOldPhotos();
+    filterByTopCommented(photos);
+  }));
   discussedFilterButton.addEventListener('click', () => {
     defaultFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.remove('img-filters__button--active');
     discussedFilterButton.classList.add('img-filters__button--active');
-    clearOldPhotos();
-    filterByTopCommented(photos);
   });
 
+  randomFilterButton.addEventListener('click', debounce(() => {
+    clearOldPhotos();
+    filterByRandom(photos);
+  }));
   randomFilterButton.addEventListener('click', () => {
     discussedFilterButton.classList.remove('img-filters__button--active');
     defaultFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.add('img-filters__button--active');
-    clearOldPhotos();
-    filterByRandom(photos);
   });
 
+  defaultFilterButton.addEventListener('click', debounce(() => {
+    clearOldPhotos();
+    filterByDefault(photos);
+  }));
   defaultFilterButton.addEventListener('click', () => {
     discussedFilterButton.classList.remove('img-filters__button--active');
     randomFilterButton.classList.remove('img-filters__button--active');
     defaultFilterButton.classList.add('img-filters__button--active');
-    clearOldPhotos();
-    filterByDefault(photos);
   });
 }
 

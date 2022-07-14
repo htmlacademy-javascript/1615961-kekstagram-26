@@ -1,5 +1,5 @@
 import {createPhotos} from './data.js';
-import {getRandomInteger, isEscapeKey} from './utilites.js';
+import {getRandomInteger, isEscapeKey, debounce} from './utilites.js';
 import {renderPhotos} from './miniatures.js';
 import './big-photo.js';
 import './user-form.js';
@@ -21,7 +21,6 @@ import {showImageFilters, addSortButtonListeners} from './filter.js';
 function onSuccess (photos) {
   renderPhotos(photos);
   addSortButtonListeners(photos);
-  // console.log(photos);
   showImageFilters();
 }
 
