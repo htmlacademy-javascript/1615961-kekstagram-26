@@ -11,14 +11,6 @@ function getRandomInteger(min, max) {
   return Math.floor(random);
 }
 
-// Функция для проверки максимальной длины строки.
-
-function isCommentLengthOk(comment, maxCommentLength = 140) {
-  return comment.length <= maxCommentLength;
-}
-
-isCommentLengthOk(123, );
-
 // Функция для проверки нажатия Esc.
 
 function isEscapeKey (evt) {

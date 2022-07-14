@@ -53,7 +53,6 @@ function filterByDefault (photos) {
   renderPhotos(sortedPhotos);
 }
 
-
 function addSortButtonListeners (photos) {
 
   discussedFilterButton.addEventListener('click', debounce(() => {

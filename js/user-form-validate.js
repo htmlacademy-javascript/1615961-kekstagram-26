@@ -70,7 +70,6 @@ pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-тег�
 
 // Отправка формы
 
-
 const submitButton = document.querySelector('.img-upload__submit');
 
 const blockSubmitButton = function () {
@@ -115,7 +114,6 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-
 // Блок с сообщениями об успехе отправки формы
 
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -127,8 +125,6 @@ function onSuccessEscKeydown (evt) {
     closeSuccessMessage();
   }
 }
-
-// Не понимаю, почему эта функция работает, по-моему там должно быть !==
 
 function onSuccesMessageClickAround (evt) {
   if (evt.target === successTemplate) {
