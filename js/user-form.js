@@ -1,16 +1,17 @@
 import {isEscapeKey} from './utilites.js';
 import {addNoEffect} from './photo-effects.js';
+import {addDefaultScale} from './scale.js';
 
 const uploadImage = document.querySelector('#upload-file');
 const uploadImageForm = document.querySelector('.img-upload__overlay');
 const uploadImageDescription = document.querySelector('.text__description');
 const uploadImageHashtags = document.querySelector('.text__hashtags');
-
 const uploadImageClose = document.querySelector('#upload-cancel');
 
 function openForm () {
   uploadImageForm.classList.remove('hidden');
   addNoEffect();
+  addDefaultScale();
   document.body.classList.add('modal-open');
 }
 
