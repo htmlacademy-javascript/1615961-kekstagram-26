@@ -17,18 +17,7 @@ const discussedFilterButton = document.querySelector('#filter-discussed');
 const randomFilterButton = document.querySelector('#filter-random');
 
 function filterByTopCommented (photos) {
-  for (let i = photos.length - 1; i > 0; i--) {
-    for (let j = i - 1; j >= 0; j--) {
-      let maxCommentAmount = photos[i].comments.length;
-      if (photos[j].comments.length < maxCommentAmount) {
-        maxCommentAmount = photos[j].comments.length;
-        const swap = photos[i];
-        photos[i] = photos[j];
-        photos[j] = swap;
-      }
-    }
-  }
-  const sortedPhotos = photos;
+  const sortedPhotos = photos.slice().sort((a, b) => b.comments.length - a.comments.length);
   renderPhotos(sortedPhotos);
 }
 
@@ -38,18 +27,7 @@ function filterByRandom (photos) {
 }
 
 function filterByDefault (photos) {
-  for (let i = 0; i <= photos.length - 2; i++) {
-    let minId = photos[i].id;
-    for (let j = i + 1; j <= photos.length - 1; j++) {
-      if (photos[j].id < minId) {
-        minId = photos[j].id;
-        const swap = photos[i];
-        photos[i] = photos[j];
-        photos[j] = swap;
-      }
-    }
-  }
-  const sortedPhotos = photos;
+  const sortedPhotos = photos.slice().sort((a, b) => a.id - b.id);
   renderPhotos(sortedPhotos);
 }
 
