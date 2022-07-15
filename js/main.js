@@ -1,4 +1,4 @@
-import {getRandomInteger, isEscapeKey, debounce} from './utilites.js';
+import './utilites.js';
 import {renderPhotos} from './miniatures.js';
 import './big-photo.js';
 import './user-form.js';
