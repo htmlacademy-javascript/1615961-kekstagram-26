@@ -22,13 +22,12 @@ function filterByTopCommented (photos) {
 }
 
 function filterByRandom (photos) {
-  const sortedPhotos = shuffle(photos).slice(0, 10);
+  const sortedPhotos = shuffle(photos.slice()).slice(0, 10);
   renderPhotos(sortedPhotos);
 }
 
 function filterByDefault (photos) {
-  const sortedPhotos = photos.slice().sort((a, b) => a.id - b.id);
-  renderPhotos(sortedPhotos);
+  renderPhotos(photos);
 }
 
 function addSortButtonListeners (photos) {
