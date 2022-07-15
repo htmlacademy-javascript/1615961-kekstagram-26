@@ -1,4 +1,5 @@
 import {isEscapeKey} from './utilites.js';
+import {addNoEffect} from './photo-effects.js';
 
 const uploadImage = document.querySelector('#upload-file');
 const uploadImageForm = document.querySelector('.img-upload__overlay');
@@ -9,6 +10,7 @@ const uploadImageClose = document.querySelector('#upload-cancel');
 
 function openForm () {
   uploadImageForm.classList.remove('hidden');
+  addNoEffect();
   document.body.classList.add('modal-open');
 }
 

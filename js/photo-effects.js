@@ -33,6 +33,7 @@ function addNoEffect () {
   pictureElement.classList.remove('effects__preview--heat');
   pictureElement.classList.add('effects__preview--none');
   sliderElement.classList.add('hidden');
+  noEffect.checked = true;
 
   pictureElement.style.filter = '';
 }
@@ -168,3 +169,5 @@ marvinEffect.addEventListener('change', addMarvinEffect);
 phobosEffect.addEventListener('change', addPhobosEffect);
 heatEffect.addEventListener('change', addHeatEffect);
 noEffect.addEventListener('change', addNoEffect);
+
+export {addNoEffect};
