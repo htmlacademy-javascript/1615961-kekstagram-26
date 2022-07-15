@@ -3,82 +3,87 @@ const scaleButtonPlus = document.querySelector('.scale__control--bigger');
 const scaleField = document.querySelector('.scale__control--value');
 const pictureElement = document.querySelector('.img-upload__preview-picture');
 
-let scaleFieldValue = 100;
-scaleField.value = `${scaleFieldValue }%`;
-
 function scalePlus () {
-  if (scaleFieldValue <= 75) {
-    scaleFieldValue = Number(scaleFieldValue) + 25;
-    scaleField.value = `${scaleFieldValue }%`;
+  if (parseInt(scaleField.value, 10) <= 75) {
+    scaleField.value = `${(parseInt(scaleField.value, 10) + 25)}%`;
 
-    if (scaleFieldValue === 25) {
+    if (scaleField.value === '25%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale25');
     }
 
-    if (scaleFieldValue === 50) {
+    if (scaleField.value === '50%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale50');
     }
 
-    if (scaleFieldValue === 75) {
+    if (scaleField.value === '75%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale75');
     }
 
-    if (scaleFieldValue === 100) {
+    if (scaleField.value === '100%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.add('img-upload__preview-picture--scale100');
     }
 
-    return `${scaleFieldValue  }%`;
+    return scaleField.value;
   }
 }
 
 function scaleMinus () {
-  if (scaleFieldValue >= 50) {
-    scaleFieldValue = scaleFieldValue - 25;
-    scaleField.value = `${scaleFieldValue }%`;
+  if (parseInt(scaleField.value, 10) >= 50) {
+    scaleField.value = `${(parseInt(scaleField.value, 10) - 25)}%`;
 
-    if (scaleFieldValue === 25) {
+    if (scaleField.value === '25%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale25');
     }
 
-    if (scaleFieldValue === 50) {
+    if (scaleField.value === '50%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale50');
     }
 
-    if (scaleFieldValue === 75) {
+    if (scaleField.value === '75%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale100');
       pictureElement.classList.add('img-upload__preview-picture--scale75');
     }
 
-    if (scaleFieldValue === 100) {
+    if (scaleField.value === '100%') {
       pictureElement.classList.remove('img-upload__preview-picture--scale25');
       pictureElement.classList.remove('img-upload__preview-picture--scale50');
       pictureElement.classList.remove('img-upload__preview-picture--scale75');
       pictureElement.classList.add('img-upload__preview-picture--scale100');
     }
 
-    return `${scaleFieldValue  }%`;
+    return scaleField.value;
   }
+}
+
+function addDefaultScale () {
+  pictureElement.classList.remove('img-upload__preview-picture--scale25');
+  pictureElement.classList.remove('img-upload__preview-picture--scale50');
+  pictureElement.classList.remove('img-upload__preview-picture--scale75');
+  pictureElement.classList.add('img-upload__preview-picture--scale100');
+  scaleField.value = '100%';
 }
 
 scaleButtonPlus.addEventListener ('click', scalePlus);
 scaleButtonMinus.addEventListener ('click', scaleMinus);
+
+export {addDefaultScale};
