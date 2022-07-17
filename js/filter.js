@@ -30,6 +30,12 @@ function filterByDefault (photos) {
   renderPhotos(photos);
 }
 
+function deleteAllFilters () {
+  defaultFilterButton.classList.remove('img-filters__button--active');
+  randomFilterButton.classList.remove('img-filters__button--active');
+  discussedFilterButton.classList.remove('img-filters__button--active');
+}
+
 function addSortButtonListeners (photos) {
 
   discussedFilterButton.addEventListener('click', debounce(() => {
@@ -37,8 +43,7 @@ function addSortButtonListeners (photos) {
     filterByTopCommented(photos);
   }));
   discussedFilterButton.addEventListener('click', () => {
-    defaultFilterButton.classList.remove('img-filters__button--active');
-    randomFilterButton.classList.remove('img-filters__button--active');
+    deleteAllFilters();
     discussedFilterButton.classList.add('img-filters__button--active');
   });
 
@@ -47,8 +52,7 @@ function addSortButtonListeners (photos) {
     filterByRandom(photos);
   }));
   randomFilterButton.addEventListener('click', () => {
-    discussedFilterButton.classList.remove('img-filters__button--active');
-    defaultFilterButton.classList.remove('img-filters__button--active');
+    deleteAllFilters();
     randomFilterButton.classList.add('img-filters__button--active');
   });
 
@@ -57,8 +61,7 @@ function addSortButtonListeners (photos) {
     filterByDefault(photos);
   }));
   defaultFilterButton.addEventListener('click', () => {
-    discussedFilterButton.classList.remove('img-filters__button--active');
-    randomFilterButton.classList.remove('img-filters__button--active');
+    deleteAllFilters();
     defaultFilterButton.classList.add('img-filters__button--active');
   });
 }
