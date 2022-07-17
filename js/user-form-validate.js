@@ -85,11 +85,7 @@ function unblockSubmitButton () {
 
 form.addEventListener('input', () => {
   const isValid = pristine.validate();
-  if (!isValid) {
-    submitButton.disabled = true;
-  } else {
-    submitButton.disabled = false;
-  }
+  submitButton.disabled = !isValid;
 });
 
 function setUserFormSubmit (onSuccess) {

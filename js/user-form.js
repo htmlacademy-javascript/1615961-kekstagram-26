@@ -29,11 +29,10 @@ function closeForm () {
 function onFormEscKeydown (evt) {
   if (uploadImageDescription === document.activeElement || uploadImageHashtags === document.activeElement) {
     return evt;
-  } else {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      closeForm ();
-    }
+  }
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeForm ();
   }
 }
 
