@@ -27,6 +27,18 @@ function validateHashtagValue (value) {
   } return false;
 }
 
+function validateSpaceBeforeHashtag (value) {
+  const array = value.split('');
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === ' ') {
+      for (let j = i + 1; j < array.length; j++) {
+        return array[j] === '#';
+      }
+    }
+  }
+  return true;
+}
+
 function validateFirstSpace (value) {
   const array = value.split('');
   if (array[0] === ' ') {
@@ -34,7 +46,6 @@ function validateFirstSpace (value) {
   }
   return true;
 }
-
 
 function validateHashtagLength (value) {
   const array = value.split(' ');
@@ -74,6 +85,7 @@ function validateNotSameInLowerCase (value) {
 
 pristine.addValidator(hashtagsFieldElement, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
 pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
+pristine.addValidator(hashtagsFieldElement, validateSpaceBeforeHashtag, 'хэш-тег начинается с символа # (решётка)');
 pristine.addValidator(hashtagsFieldElement, validateFirstSpace, 'пробел перед первым хэштегом не допускается');
 pristine.addValidator(hashtagsFieldElement, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
 pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
