@@ -18,30 +18,30 @@ const pristine = new Pristine(form, {
 
 const hashtagsField = document.querySelector('.text__hashtags');
 
-const validateHashtagValue = function (value) {
+function validateHashtagValue (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
     if (RE.test(arrayElement) || arrayElement === '') {
       return true;
     }
   } return false;
-};
+}
 
-const validateHashtagLength = function (value) {
+function validateHashtagLength (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
     if (arrayElement.length <= MAX_HASHTAG_LENGTH) {
       return true;
     }
   } return false;
-};
+}
 
-const validateHashtagsQuantity = function (value) {
+function validateHashtagsQuantity (value) {
   const array = value.split(' ');
   return array.length <= MAX_HASHTAG_QUANTITY;
-};
+}
 
-const validateNotSameHashtags = function (value) {
+function validateNotSameHashtags (value) {
   const array = value.split(' ');
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -50,9 +50,9 @@ const validateNotSameHashtags = function (value) {
       }
     }
   } return true;
-};
+}
 
-const validateNotSameInLowerCase = function (value) {
+function validateNotSameInLowerCase (value) {
   const array = value.split(' ');
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -61,7 +61,7 @@ const validateNotSameInLowerCase = function (value) {
       }
     }
   } return true;
-};
+}
 
 pristine.addValidator(hashtagsField, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
 pristine.addValidator(hashtagsField, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
@@ -73,15 +73,15 @@ pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-тег�
 
 const submitButton = document.querySelector('.img-upload__submit');
 
-const blockSubmitButton = function () {
+function blockSubmitButton () {
   submitButton.disabled = true;
   submitButton.textContent = 'Отправляю..';
-};
+}
 
-const unblockSubmitButton = function () {
+function unblockSubmitButton () {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
-};
+}
 
 form.addEventListener('input', () => {
   const isValid = pristine.validate();
@@ -92,7 +92,7 @@ form.addEventListener('input', () => {
   }
 });
 
-const setUserFormSubmit = (onSuccess) => {
+function setUserFormSubmit (onSuccess) {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -113,7 +113,7 @@ const setUserFormSubmit = (onSuccess) => {
       );
     }
   });
-};
+}
 
 // Блок с сообщениями об успехе отправки формы
 

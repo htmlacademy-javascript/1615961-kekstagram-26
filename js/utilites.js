@@ -2,7 +2,7 @@
 
 const ALERT_SHOW_TIME = 5000;
 
-const showAlert = function (message) {
+function showAlert (message) {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -21,7 +21,7 @@ const showAlert = function (message) {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
+}
 
 // Функция для проверки нажатия Esc.
 
