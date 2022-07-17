@@ -1,5 +1,5 @@
 import {isEscapeKey} from './utilites.js';
-import {addNoEffect} from './photo-effects.js';
+import {onNoEffectChange} from './photo-effects.js';
 import {addDefaultScale} from './scale.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
@@ -12,7 +12,7 @@ const uploadImageClose = document.querySelector('#upload-cancel');
 
 function openForm () {
   uploadImageForm.classList.remove('hidden');
-  addNoEffect();
+  onNoEffectChange();
   addDefaultScale();
   document.body.classList.add('modal-open');
 }

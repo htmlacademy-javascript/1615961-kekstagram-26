@@ -25,7 +25,7 @@ sliderElement.noUiSlider.on('update', () => {
 
 sliderElement.classList.add('hidden');
 
-function addNoEffect () {
+function onNoEffectChange () {
   pictureElement.classList.remove('effects__preview--sepia');
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--marvin');
@@ -38,7 +38,7 @@ function addNoEffect () {
   pictureElement.style.filter = '';
 }
 
-function addChromeEffect () {
+function onChromeEffectChange () {
   pictureElement.classList.remove('effects__preview--sepia');
   pictureElement.classList.remove('effects__preview--none');
   pictureElement.classList.remove('effects__preview--marvin');
@@ -63,7 +63,7 @@ function addChromeEffect () {
   });
 }
 
-function addSepiaEffect() {
+function onSepiaEffectChange () {
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--none');
   pictureElement.classList.remove('effects__preview--marvin');
@@ -88,7 +88,7 @@ function addSepiaEffect() {
   });
 }
 
-function addMarvinEffect() {
+function onMarvinEffectChange () {
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--none');
   pictureElement.classList.remove('effects__preview--sepia');
@@ -113,7 +113,7 @@ function addMarvinEffect() {
   });
 }
 
-function addPhobosEffect() {
+function onPhobosEffectChange() {
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--none');
   pictureElement.classList.remove('effects__preview--marvin');
@@ -138,7 +138,7 @@ function addPhobosEffect() {
   });
 }
 
-function addHeatEffect() {
+function onHeatEffectChange () {
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--none');
   pictureElement.classList.remove('effects__preview--marvin');
@@ -163,11 +163,11 @@ function addHeatEffect() {
   });
 }
 
-chromeEffect.addEventListener('change', addChromeEffect);
-sepiaEffect.addEventListener('change', addSepiaEffect);
-marvinEffect.addEventListener('change', addMarvinEffect);
-phobosEffect.addEventListener('change', addPhobosEffect);
-heatEffect.addEventListener('change', addHeatEffect);
-noEffect.addEventListener('change', addNoEffect);
+chromeEffect.addEventListener('change', onChromeEffectChange);
+sepiaEffect.addEventListener('change', onSepiaEffectChange);
+marvinEffect.addEventListener('change', onMarvinEffectChange);
+phobosEffect.addEventListener('change', onPhobosEffectChange);
+heatEffect.addEventListener('change', onHeatEffectChange);
+noEffect.addEventListener('change', onNoEffectChange);
 
-export {addNoEffect};
+export {onNoEffectChange};
