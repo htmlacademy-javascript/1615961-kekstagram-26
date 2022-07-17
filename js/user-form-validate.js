@@ -29,11 +29,9 @@ function validateHashtagValue (value) {
 
 function validateSpaceBeforeHashtag (value) {
   const array = value.split('');
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 2; i < array.length - 1; i++) {
     if (array[i] === ' ') {
-      for (let j = i + 1; j < array.length; j++) {
-        return array[j] === '#';
-      }
+      return array[i + 1] === '#';
     }
   }
   return true;
