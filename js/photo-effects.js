@@ -2,12 +2,12 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const pictureElement = document.querySelector('.img-upload__preview-picture');
 
-const noEffect = document.querySelector('#effect-none');
-const chromeEffect = document.querySelector('#effect-chrome');
-const sepiaEffect = document.querySelector('#effect-sepia');
-const marvinEffect = document.querySelector('#effect-marvin');
-const phobosEffect = document.querySelector('#effect-phobos');
-const heatEffect = document.querySelector('#effect-heat');
+const noEffectElement = document.querySelector('#effect-none');
+const chromeEffectElement = document.querySelector('#effect-chrome');
+const sepiaEffectElement = document.querySelector('#effect-sepia');
+const marvinEffectElement = document.querySelector('#effect-marvin');
+const phobosEffectElement = document.querySelector('#effect-phobos');
+const heatEffectElement = document.querySelector('#effect-heat');
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -38,7 +38,7 @@ function onNoEffectChange () {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--none');
   sliderElement.classList.add('hidden');
-  noEffect.checked = true;
+  noEffectElement.checked = true;
 
   pictureElement.style.filter = '';
 }
@@ -148,11 +148,11 @@ function onHeatEffectChange () {
   });
 }
 
-chromeEffect.addEventListener('change', onChromeEffectChange);
-sepiaEffect.addEventListener('change', onSepiaEffectChange);
-marvinEffect.addEventListener('change', onMarvinEffectChange);
-phobosEffect.addEventListener('change', onPhobosEffectChange);
-heatEffect.addEventListener('change', onHeatEffectChange);
-noEffect.addEventListener('change', onNoEffectChange);
+chromeEffectElement.addEventListener('change', onChromeEffectChange);
+sepiaEffectElement.addEventListener('change', onSepiaEffectChange);
+marvinEffectElement.addEventListener('change', onMarvinEffectChange);
+phobosEffectElement.addEventListener('change', onPhobosEffectChange);
+heatEffectElement.addEventListener('change', onHeatEffectChange);
+noEffectElement.addEventListener('change', onNoEffectChange);
 
 export {onNoEffectChange};

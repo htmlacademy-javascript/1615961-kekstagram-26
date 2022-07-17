@@ -1,30 +1,30 @@
-const scaleMinusButton = document.querySelector('.scale__control--smaller');
-const scalePlusButton = document.querySelector('.scale__control--bigger');
-const scaleField = document.querySelector('.scale__control--value');
+const scaleMinusButtonElement = document.querySelector('.scale__control--smaller');
+const scalePlusButtonElement = document.querySelector('.scale__control--bigger');
+const scaleFieldElement = document.querySelector('.scale__control--value');
 const pictureElement = document.querySelector('.img-upload__preview-picture');
 
 function onScalePlusButtonclick () {
-  if (parseInt(scaleField.value, 10) <= 75) {
-    scaleField.value = `${(parseInt(scaleField.value, 10) + 25)}%`;
-    pictureElement.style.transform = `scale(${parseInt(scaleField.value, 10) / 100})`;
-    return scaleField.value;
+  if (parseInt(scaleFieldElement.value, 10) <= 75) {
+    scaleFieldElement.value = `${(parseInt(scaleFieldElement.value, 10) + 25)}%`;
+    pictureElement.style.transform = `scale(${parseInt(scaleFieldElement.value, 10) / 100})`;
+    return scaleFieldElement.value;
   }
 }
 
 function onScaleMinusButtonclick () {
-  if (parseInt(scaleField.value, 10) >= 50) {
-    scaleField.value = `${(parseInt(scaleField.value, 10) - 25)}%`;
-    pictureElement.style.transform = `scale(${parseInt(scaleField.value, 10) / 100})`;
-    return scaleField.value;
+  if (parseInt(scaleFieldElement.value, 10) >= 50) {
+    scaleFieldElement.value = `${(parseInt(scaleFieldElement.value, 10) - 25)}%`;
+    pictureElement.style.transform = `scale(${parseInt(scaleFieldElement.value, 10) / 100})`;
+    return scaleFieldElement.value;
   }
 }
 
 function addDefaultScale () {
-  scaleField.value = '100%';
+  scaleFieldElement.value = '100%';
   pictureElement.style.transform = 'scale(1)';
 }
 
-scalePlusButton.addEventListener ('click', onScalePlusButtonclick);
-scaleMinusButton.addEventListener ('click', onScaleMinusButtonclick);
+scalePlusButtonElement.addEventListener ('click', onScalePlusButtonclick);
+scaleMinusButtonElement.addEventListener ('click', onScaleMinusButtonclick);
 
 export {addDefaultScale};

@@ -6,9 +6,9 @@ const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_QUANTITY = 5;
 
-const form = document.querySelector('.img-upload__form');
+const formElement = document.querySelector('.img-upload__form');
 
-const pristine = new Pristine(form, {
+const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextClass: 'error-text',
@@ -16,7 +16,7 @@ const pristine = new Pristine(form, {
 
 // Валидация хэштегов
 
-const hashtagsField = document.querySelector('.text__hashtags');
+const hashtagsFieldElement = document.querySelector('.text__hashtags');
 
 function validateHashtagValue (value) {
   const array = value.split(' ');
@@ -63,33 +63,33 @@ function validateNotSameInLowerCase (value) {
   } return true;
 }
 
-pristine.addValidator(hashtagsField, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
-pristine.addValidator(hashtagsField, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
-pristine.addValidator(hashtagsField, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки', false);
-pristine.addValidator(hashtagsField, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
-pristine.addValidator(hashtagsField, validateNotSameInLowerCase, 'хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом');
+pristine.addValidator(hashtagsFieldElement, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
+pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
+pristine.addValidator(hashtagsFieldElement, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки', false);
+pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
+pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, 'хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом');
 
 // Отправка формы
 
-const submitButton = document.querySelector('.img-upload__submit');
+const submitButtonElement = document.querySelector('.img-upload__submit');
 
 function blockSubmitButton () {
-  submitButton.disabled = true;
-  submitButton.textContent = 'Отправляю..';
+  submitButtonElement.disabled = true;
+  submitButtonElement.textContent = 'Отправляю..';
 }
 
 function unblockSubmitButton () {
-  submitButton.disabled = false;
-  submitButton.textContent = 'Опубликовать';
+  submitButtonElement.disabled = false;
+  submitButtonElement.textContent = 'Опубликовать';
 }
 
-form.addEventListener('input', () => {
+formElement.addEventListener('input', () => {
   const isValid = pristine.validate();
-  submitButton.disabled = !isValid;
+  submitButtonElement.disabled = !isValid;
 });
 
 function setUserFormSubmit (onSuccess) {
-  form.addEventListener('submit', (evt) => {
+  formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
@@ -113,8 +113,8 @@ function setUserFormSubmit (onSuccess) {
 
 // Блок с сообщениями об успехе отправки формы
 
-const successTemplate = document.querySelector('#success').content.querySelector('.success');
-const successCloseButton = successTemplate.querySelector('.success__button');
+const successTemplateElement = document.querySelector('#success').content.querySelector('.success');
+const successCloseButtonElement = successTemplateElement.querySelector('.success__button');
 
 function onSuccessMessageEscKeydown (evt) {
   if (isEscapeKey(evt)) {
@@ -124,28 +124,28 @@ function onSuccessMessageEscKeydown (evt) {
 }
 
 function onSuccesMessageClickAround (evt) {
-  if (evt.target === successTemplate) {
+  if (evt.target === successTemplateElement) {
     closeSuccessMessage();
   }
 }
 
 function openSuccessMessage () {
-  document.body.appendChild(successTemplate);
+  document.body.appendChild(successTemplateElement);
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
-  successCloseButton.addEventListener('click', closeSuccessMessage);
+  successCloseButtonElement.addEventListener('click', closeSuccessMessage);
   document.addEventListener('click', onSuccesMessageClickAround);
 }
 
 function closeSuccessMessage() {
-  document.body.removeChild(successTemplate);
+  document.body.removeChild(successTemplateElement);
   document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   document.removeEventListener('click', onSuccesMessageClickAround);
 }
 
 // Блок с сообщениями об ошибке отправки формы
 
-const errorTemplate = document.querySelector('#error').content.querySelector('.error');
-const errorCloseButton = errorTemplate.querySelector('.error__button');
+const errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
+const errorCloseButtonElement = errorTemplateElement.querySelector('.error__button');
 
 function onErrorMessageEscKeydown (evt) {
   if (isEscapeKey(evt)) {
@@ -155,22 +155,22 @@ function onErrorMessageEscKeydown (evt) {
 }
 
 function onErrorMessageClickAround (evt) {
-  if (evt.target === errorTemplate) {
+  if (evt.target === errorTemplateElement) {
     closeErrorMessage();
   }
 }
 
 function openErrorMessage () {
-  document.body.appendChild(errorTemplate);
+  document.body.appendChild(errorTemplateElement);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
-  errorCloseButton.addEventListener('click', closeErrorMessage);
-  errorTemplate.style.zIndex =  '100';
+  errorCloseButtonElement.addEventListener('click', closeErrorMessage);
+  errorTemplateElement.style.zIndex =  '100';
   document.addEventListener('click', onErrorMessageClickAround);
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
 function closeErrorMessage() {
-  document.body.removeChild(errorTemplate);
+  document.body.removeChild(errorTemplateElement);
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
   document.removeEventListener('click', onErrorMessageClickAround);
   document.addEventListener('keydown', onFormEscKeydown);
