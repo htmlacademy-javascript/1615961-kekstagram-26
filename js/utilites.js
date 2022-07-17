@@ -49,4 +49,4 @@ function shuffle(photos) {
   return photos;
 }
 
-export {getRandomInteger, isEscapeKey, showAlert, debounce, shuffle};
+export {isEscapeKey, showAlert, debounce, shuffle};

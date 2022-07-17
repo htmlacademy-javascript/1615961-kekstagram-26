@@ -2,6 +2,10 @@ import {isEscapeKey, showAlert} from './utilites.js';
 import {sendData} from './api.js';
 import {onFormEscKeydown} from './user-form.js';
 
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAG_QUANTITY = 5;
+
 const form = document.querySelector('.img-upload__form');
 
 const pristine = new Pristine(form, {
@@ -13,22 +17,20 @@ const pristine = new Pristine(form, {
 // Валидация хэштегов
 
 const hashtagsField = document.querySelector('.text__hashtags');
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const validateHashtagValue = function (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (re.test(arrayElement) || arrayElement === '') {
+    if (RE.test(arrayElement) || arrayElement === '') {
       return true;
     }
   } return false;
 };
 
 const validateHashtagLength = function (value) {
-  const maxHastagLength = 20;
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (arrayElement.length <= maxHastagLength) {
+    if (arrayElement.length <= MAX_HASHTAG_LENGTH) {
       return true;
     }
   } return false;
@@ -36,8 +38,7 @@ const validateHashtagLength = function (value) {
 
 const validateHashtagsQuantity = function (value) {
   const array = value.split(' ');
-  const maxHastagsQuantity = 5;
-  return array.length <= maxHastagsQuantity;
+  return array.length <= MAX_HASHTAG_QUANTITY;
 };
 
 const validateNotSameHashtags = function (value) {

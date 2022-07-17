@@ -1,10 +1,12 @@
 import {showAlert} from './utilites.js';
 
-const addressGetServer = 'https://26.javascript.pages.academy/kekstagram/data';
-const addressPostServer = 'https://26.javascript.pages.academy/kekstagram';
+const ServerAddresses = {
+  ADDRESS_GET_SERVER: 'https://26.javascript.pages.academy/kekstagram/data',
+  ADDRESS_POST_SERVER: 'https://26.javascript.pages.academy/kekstagram',
+};
 
 const getData = (onSuccess) => {
-  fetch(addressGetServer)
+  fetch(ServerAddresses.ADDRESS_GET_SERVER)
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
@@ -16,7 +18,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
 
-  fetch(addressPostServer,
+  fetch(ServerAddresses.ADDRESS_POST_SERVER,
     {
       method: 'POST',
       body,
