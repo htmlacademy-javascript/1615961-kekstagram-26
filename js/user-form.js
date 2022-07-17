@@ -2,6 +2,8 @@ import {isEscapeKey} from './utilites.js';
 import {addNoEffect} from './photo-effects.js';
 import {addDefaultScale} from './scale.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
+
 const uploadImage = document.querySelector('#upload-file');
 const uploadImageForm = document.querySelector('.img-upload__overlay');
 const uploadImageDescription = document.querySelector('.text__description');
@@ -45,8 +47,6 @@ uploadImageClose.addEventListener('click', () => {
 });
 
 // Блок с подстановкой выбранного изображения
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
 
 const fileChooser = document.querySelector('.img-upload__input');
 const previewPhoto = document.querySelector('.img-upload__preview-picture');

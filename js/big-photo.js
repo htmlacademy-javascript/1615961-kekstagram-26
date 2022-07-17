@@ -1,8 +1,9 @@
 import {isEscapeKey} from './utilites.js';
 
+const MAX_SHOWN_COMMEN_AMOUNT = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureClose = document.querySelector('.big-picture__cancel');
-
 const bigPictureImg = bigPicture.querySelector('img');
 const bigPictureLikes = bigPicture.querySelector('.likes-count');
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
@@ -10,9 +11,7 @@ const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
 const bigPictureCommentsCount = bigPicture.querySelector('.comments-count');
 const bigPictureCommentsCounter = bigPicture.querySelector('.social__comment-count');
 const bigPictureCommentsLoader = bigPicture.querySelector('.social__comments-loader');
-
 const commentElementTemplate = document.querySelector('#social__comment').content.querySelector('.social__comment');
-const MAX_SHOWN_COMMEN_AMOUNT = 5;
 
 function showBigPicture (url, likes, comments, description) {
   document.addEventListener('keydown', onBigPictureEscKeydown);
