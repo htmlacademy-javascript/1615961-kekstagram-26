@@ -2,12 +2,12 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const pictureElement = document.querySelector('.img-upload__preview-picture');
 
-const noEffect = document.querySelector('#effect-none');
-const chromeEffect = document.querySelector('#effect-chrome');
-const sepiaEffect = document.querySelector('#effect-sepia');
-const marvinEffect = document.querySelector('#effect-marvin');
-const phobosEffect = document.querySelector('#effect-phobos');
-const heatEffect = document.querySelector('#effect-heat');
+const noEffectElement = document.querySelector('#effect-none');
+const chromeEffectElement = document.querySelector('#effect-chrome');
+const sepiaEffectElement = document.querySelector('#effect-sepia');
+const marvinEffectElement = document.querySelector('#effect-marvin');
+const phobosEffectElement = document.querySelector('#effect-phobos');
+const heatEffectElement = document.querySelector('#effect-heat');
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -25,25 +25,26 @@ sliderElement.noUiSlider.on('update', () => {
 
 sliderElement.classList.add('hidden');
 
-function addNoEffect () {
+function deleteAllEffects () {
   pictureElement.classList.remove('effects__preview--sepia');
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--marvin');
   pictureElement.classList.remove('effects__preview--phobos');
   pictureElement.classList.remove('effects__preview--heat');
+  pictureElement.classList.remove('effects__preview--none');
+}
+
+function onNoEffectChange () {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--none');
   sliderElement.classList.add('hidden');
-  noEffect.checked = true;
+  noEffectElement.checked = true;
 
   pictureElement.style.filter = '';
 }
 
-function addChromeEffect () {
-  pictureElement.classList.remove('effects__preview--sepia');
-  pictureElement.classList.remove('effects__preview--none');
-  pictureElement.classList.remove('effects__preview--marvin');
-  pictureElement.classList.remove('effects__preview--phobos');
-  pictureElement.classList.remove('effects__preview--heat');
+function onChromeEffectChange () {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--chrome');
   sliderElement.classList.remove('hidden');
 
@@ -63,12 +64,8 @@ function addChromeEffect () {
   });
 }
 
-function addSepiaEffect() {
-  pictureElement.classList.remove('effects__preview--chrome');
-  pictureElement.classList.remove('effects__preview--none');
-  pictureElement.classList.remove('effects__preview--marvin');
-  pictureElement.classList.remove('effects__preview--phobos');
-  pictureElement.classList.remove('effects__preview--heat');
+function onSepiaEffectChange () {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--sepia');
   sliderElement.classList.remove('hidden');
 
@@ -88,12 +85,8 @@ function addSepiaEffect() {
   });
 }
 
-function addMarvinEffect() {
-  pictureElement.classList.remove('effects__preview--chrome');
-  pictureElement.classList.remove('effects__preview--none');
-  pictureElement.classList.remove('effects__preview--sepia');
-  pictureElement.classList.remove('effects__preview--phobos');
-  pictureElement.classList.remove('effects__preview--heat');
+function onMarvinEffectChange () {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--marvin');
   sliderElement.classList.remove('hidden');
 
@@ -113,12 +106,8 @@ function addMarvinEffect() {
   });
 }
 
-function addPhobosEffect() {
-  pictureElement.classList.remove('effects__preview--chrome');
-  pictureElement.classList.remove('effects__preview--none');
-  pictureElement.classList.remove('effects__preview--marvin');
-  pictureElement.classList.remove('effects__preview--sepia');
-  pictureElement.classList.remove('effects__preview--heat');
+function onPhobosEffectChange() {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--phobos');
   sliderElement.classList.remove('hidden');
 
@@ -138,12 +127,8 @@ function addPhobosEffect() {
   });
 }
 
-function addHeatEffect() {
-  pictureElement.classList.remove('effects__preview--chrome');
-  pictureElement.classList.remove('effects__preview--none');
-  pictureElement.classList.remove('effects__preview--marvin');
-  pictureElement.classList.remove('effects__preview--phobos');
-  pictureElement.classList.remove('effects__preview--sepia');
+function onHeatEffectChange () {
+  deleteAllEffects();
   pictureElement.classList.add('effects__preview--heat');
   sliderElement.classList.remove('hidden');
 
@@ -163,11 +148,11 @@ function addHeatEffect() {
   });
 }
 
-chromeEffect.addEventListener('change', addChromeEffect);
-sepiaEffect.addEventListener('change', addSepiaEffect);
-marvinEffect.addEventListener('change', addMarvinEffect);
-phobosEffect.addEventListener('change', addPhobosEffect);
-heatEffect.addEventListener('change', addHeatEffect);
-noEffect.addEventListener('change', addNoEffect);
+chromeEffectElement.addEventListener('change', onChromeEffectChange);
+sepiaEffectElement.addEventListener('change', onSepiaEffectChange);
+marvinEffectElement.addEventListener('change', onMarvinEffectChange);
+phobosEffectElement.addEventListener('change', onPhobosEffectChange);
+heatEffectElement.addEventListener('change', onHeatEffectChange);
+noEffectElement.addEventListener('change', onNoEffectChange);
 
-export {addNoEffect};
+export {onNoEffectChange};

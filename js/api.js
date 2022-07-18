@@ -1,22 +1,27 @@
 import {showAlert} from './utilites.js';
 
-const addressGetServer = 'https://26.javascript.pages.academy/kekstagram/data';
-const addressPostServer = 'https://26.javascript.pages.academy/kekstagram';
+const ERROR_DOWNLOAD_MESSAGE = 'Не удалось получить данные с сервера. Попробуйте ещё раз';
+const ERROR_UPLOAD_MESSAGE = 'Не удалось отправить форму. Попробуйте ещё раз';
 
-const getData = (onSuccess) => {
-  fetch(addressGetServer)
+const ServerAddresses = {
+  ADDRESS_GET_SERVER: 'https://26.javascript.pages.academy/kekstagram/data',
+  ADDRESS_POST_SERVER: 'https://26.javascript.pages.academy/kekstagram',
+};
+
+function getData (onSuccess) {
+  fetch(ServerAddresses.ADDRESS_GET_SERVER)
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
     })
     .catch(() => {
-      showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
+      showAlert(ERROR_DOWNLOAD_MESSAGE);
     });
-};
+}
 
-const sendData = (onSuccess, onFail, body) => {
+function sendData (onSuccess, onFail, body) {
 
-  fetch(addressPostServer,
+  fetch(ServerAddresses.ADDRESS_POST_SERVER,
     {
       method: 'POST',
       body,
@@ -26,12 +31,12 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail(ERROR_UPLOAD_MESSAGE);
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail(ERROR_UPLOAD_MESSAGE);
     });
-};
+}
 
 export {getData, sendData};

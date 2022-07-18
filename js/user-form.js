@@ -1,64 +1,63 @@
 import {isEscapeKey} from './utilites.js';
-import {addNoEffect} from './photo-effects.js';
+import {onNoEffectChange} from './photo-effects.js';
 import {addDefaultScale} from './scale.js';
 
-const uploadImage = document.querySelector('#upload-file');
-const uploadImageForm = document.querySelector('.img-upload__overlay');
-const uploadImageDescription = document.querySelector('.text__description');
-const uploadImageHashtags = document.querySelector('.text__hashtags');
-const uploadImageClose = document.querySelector('#upload-cancel');
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
+
+const uploadImageElement = document.querySelector('#upload-file');
+const uploadImageFormElement = document.querySelector('.img-upload__overlay');
+const uploadImageDescriptionElement = document.querySelector('.text__description');
+const uploadImageHashtagsElement = document.querySelector('.text__hashtags');
+const uploadImageCloseButtonElement = document.querySelector('#upload-cancel');
 
 function openForm () {
-  uploadImageForm.classList.remove('hidden');
-  addNoEffect();
+  uploadImageFormElement.classList.remove('hidden');
+  onNoEffectChange();
   addDefaultScale();
   document.body.classList.add('modal-open');
 }
 
 function closeForm () {
-  uploadImageForm.classList.add('hidden');
+  uploadImageFormElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  uploadImage.value = '';
-  uploadImageDescription.value ='';
-  uploadImageHashtags.value = '';
+  uploadImageElement.value = '';
+  uploadImageDescriptionElement.value ='';
+  uploadImageHashtagsElement.value = '';
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
 function onFormEscKeydown (evt) {
-  if (uploadImageDescription === document.activeElement || uploadImageHashtags === document.activeElement) {
+  if (uploadImageDescriptionElement === document.activeElement || uploadImageHashtagsElement === document.activeElement) {
     return evt;
-  } else {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      closeForm ();
-    }
+  }
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeForm ();
   }
 }
 
-uploadImage.addEventListener('change', () => {
+uploadImageElement.addEventListener('change', () => {
   openForm();
   document.addEventListener('keydown', onFormEscKeydown);
 });
 
-uploadImageClose.addEventListener('click', () => {
+uploadImageCloseButtonElement.addEventListener('click', () => {
   closeForm();
 });
 
 // Блок с подстановкой выбранного изображения
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
+const fileChooserElement = document.querySelector('.img-upload__input');
+const previewPhotoElement = document.querySelector('.img-upload__preview-picture');
 
-const fileChooser = document.querySelector('.img-upload__input');
-const previewPhoto = document.querySelector('.img-upload__preview-picture');
-
-fileChooser.addEventListener('change', () => {
-  const file = fileChooser.files[0];
+fileChooserElement.addEventListener('change', () => {
+  const file = fileChooserElement.files[0];
   const fileName = file.name.toLowerCase();
 
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
-    previewPhoto.src = URL.createObjectURL(file);
+    previewPhotoElement.src = URL.createObjectURL(file);
   }
 });
 

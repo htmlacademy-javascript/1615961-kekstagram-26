@@ -1,18 +1,28 @@
 // Функция ошибки, если фетч не смог выполниться
 
 const ALERT_SHOW_TIME = 5000;
+const ERROR_MESSAGE_Z_INDEX = '100';
+const ERROR_MESSAGE_PADDING = '10px 3px';
+const ERROR_MESSAGE_POSITION = 'absolute';
+const ERROR_MESSAGE_FONT_SIZE = '30px';
+const ERROR_MESSAGE_BACKGROUND_COLOR = '#ff0000';
+const ERROR_MESSAGE_TEXT_ALIGN = 'center';
+const ERROR_MESSAGE_LEFT_DISTANCE = '0';
+const ERROR_MESSAGE_TOP_DISTANCE = '0';
+const ERROR_MESSAGE_RIGHT_DISTANCE = '0';
 
-const showAlert = function (message) {
+
+function showAlert (message) {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = '100';
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = '0';
-  alertContainer.style.top = '0';
-  alertContainer.style.right = '0';
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
+  alertContainer.style.zIndex = ERROR_MESSAGE_Z_INDEX;
+  alertContainer.style.position = ERROR_MESSAGE_POSITION;
+  alertContainer.style.left = ERROR_MESSAGE_LEFT_DISTANCE;
+  alertContainer.style.top = ERROR_MESSAGE_TOP_DISTANCE;
+  alertContainer.style.right = ERROR_MESSAGE_RIGHT_DISTANCE;
+  alertContainer.style.padding = ERROR_MESSAGE_PADDING;
+  alertContainer.style.fontSize = ERROR_MESSAGE_FONT_SIZE;
+  alertContainer.style.textAlign = ERROR_MESSAGE_TEXT_ALIGN;
+  alertContainer.style.backgroundColor = ERROR_MESSAGE_BACKGROUND_COLOR;
 
   alertContainer.textContent = message;
 
@@ -21,19 +31,6 @@ const showAlert = function (message) {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
-
-// Функция, возвращающая случайное целое число из переданного диапазона включительно.
-
-function getRandomInteger(min, max) {
-  if (min > max) {
-    [min, max] = [max, min];
-  }
-  if (min < 0 || max < 0) {
-    throw new RangeError('Параметры должны быть больше нуля');
-  }
-  const random = min + Math.random() * (max + 1 - min);
-  return Math.floor(random);
 }
 
 // Функция для проверки нажатия Esc.
@@ -62,4 +59,4 @@ function shuffle(photos) {
   return photos;
 }
 
-export {getRandomInteger, isEscapeKey, showAlert, debounce, shuffle};
+export {isEscapeKey, showAlert, debounce, shuffle};

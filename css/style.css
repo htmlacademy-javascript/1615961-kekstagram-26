@@ -709,6 +709,10 @@ main {
   border-radius: 5px;
 }
 
+.img-upload__error-text {
+  text-transform: none;
+  color: #ff0000;
+}
 
 /**
  * Кнопка для отправки изображения
