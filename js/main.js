@@ -9,11 +9,11 @@ import {closeForm} from './user-form.js';
 import {getData} from './api.js';
 import {showImageFilters, addSortButtonListeners} from './filter.js';
 
-function onSuccess (photos) {
+const onSuccess = (photos) => {
   renderPhotos(photos);
   addSortButtonListeners(photos);
   showImageFilters();
-}
+};
 
 getData(onSuccess);
 

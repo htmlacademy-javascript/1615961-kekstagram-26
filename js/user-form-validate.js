@@ -13,6 +13,8 @@ const HASHTAG_VALUE_ERROR_TEXT = 'Хэш-тег начинается с симв
 const HASHTAH_NOT_SAME_ERROR_TEXT = 'Один и тот же хэш-тег не может быть использован дважды';
 const HASHTAG_REGISTER_ERROR_TEXT = 'Хэш-теги нечувствительны к регистру';
 
+const ERROR_TEXT_MESSAGE = 'Не удалось отправить форму. Попробуйте ещё раз';
+
 const formElement = document.querySelector('.img-upload__form');
 
 const pristine = new Pristine(formElement, {
@@ -25,7 +27,7 @@ const pristine = new Pristine(formElement, {
 
 const hashtagsFieldElement = document.querySelector('.text__hashtags');
 
-function validateHashtagValue (value) {
+const validateHashtagValue = (value) => {
   const array = value.split(' ');
   for (const arrayElement of array) {
     if (!RE.test(arrayElement) && arrayElement !== '') {
@@ -33,31 +35,31 @@ function validateHashtagValue (value) {
     }
   }
   return true;
-}
+};
 
-function validateFirstSpace (value) {
+const validateFirstSpace = (value) => {
   const array = value.split('');
   if (array[0] !== ' ' || array[0] === '') {
     return true;
   }
   return false;
-}
+};
 
-function validateHashtagLength (value) {
+const validateHashtagLength = (value) => {
   const array = value.split(' ');
   for (const arrayElement of array) {
     if (arrayElement.length > MAX_HASHTAG_LENGTH) {
       return false;
     }
   } return true;
-}
+};
 
-function validateHashtagsQuantity (value) {
+const validateHashtagsQuantity = (value) => {
   const array = value.split(' ');
   return array.length <= MAX_HASHTAG_QUANTITY;
-}
+};
 
-function validateNotSameHashtags (value) {
+const validateNotSameHashtags = (value) => {
   const array = value.split(' ');
   for (let i = 0; i < array.length - 1; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -66,9 +68,9 @@ function validateNotSameHashtags (value) {
       }
     }
   } return true;
-}
+};
 
-function validateNotSameInLowerCase (value) {
+const validateNotSameInLowerCase = (value) => {
   const array = value.split(' ');
   for (let i = 0; i < array.length - 1; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -77,7 +79,7 @@ function validateNotSameInLowerCase (value) {
       }
     }
   } return true;
-}
+};
 
 pristine.addValidator(hashtagsFieldElement, validateHashtagLength, HASHTAG_LENGTH_ERROR_TEXT);
 pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, HASHTAG_QUANTITY_ERROR_TEXT);
@@ -90,22 +92,22 @@ pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, HASHTAG_
 
 const submitButtonElement = document.querySelector('.img-upload__submit');
 
-function blockSubmitButton () {
+const blockSubmitButton = () => {
   submitButtonElement.disabled = true;
   submitButtonElement.textContent = 'Отправляю..';
-}
+};
 
-function unblockSubmitButton () {
+const unblockSubmitButton = () => {
   submitButtonElement.disabled = false;
   submitButtonElement.textContent = 'Опубликовать';
-}
+};
 
 formElement.addEventListener('input', () => {
   const isValid = pristine.validate();
   submitButtonElement.disabled = !isValid;
 });
 
-function setUserFormSubmit (onSuccess) {
+const setUserFormSubmit = (onSuccess) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
@@ -118,7 +120,7 @@ function setUserFormSubmit (onSuccess) {
           openSuccessMessage();
         },
         () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          showAlert(ERROR_TEXT_MESSAGE);
           unblockSubmitButton();
           openErrorMessage();
         },
@@ -126,25 +128,25 @@ function setUserFormSubmit (onSuccess) {
       );
     }
   });
-}
+};
 
 // Блок с сообщениями об успехе отправки формы
 
 const successTemplateElement = document.querySelector('#success').content.querySelector('.success');
 const successCloseButtonElement = successTemplateElement.querySelector('.success__button');
 
-function onSuccessMessageEscKeydown (evt) {
+const onSuccessMessageEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     onSuccessMessageDoClose();
   }
-}
+};
 
-function onSuccesMessageClickAround (evt) {
+const onSuccesMessageClickAround = (evt) => {
   if (evt.target === successTemplateElement) {
     onSuccessMessageDoClose();
   }
-}
+};
 
 function openSuccessMessage () {
   document.body.appendChild(successTemplateElement);
@@ -164,18 +166,18 @@ function onSuccessMessageDoClose() {
 const errorTemplateElement = document.querySelector('#error').content.querySelector('.error');
 const errorCloseButtonElement = errorTemplateElement.querySelector('.error__button');
 
-function onErrorMessageEscKeydown (evt) {
+const onErrorMessageEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     onErrorMessageDoClose();
   }
-}
+};
 
-function onErrorMessageClickAround (evt) {
+const onErrorMessageClickAround = (evt) => {
   if (evt.target === errorTemplateElement) {
     onErrorMessageDoClose();
   }
-}
+};
 
 function openErrorMessage () {
   document.body.appendChild(errorTemplateElement);

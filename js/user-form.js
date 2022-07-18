@@ -10,21 +10,21 @@ const uploadImageDescriptionElement = document.querySelector('.text__description
 const uploadImageHashtagsElement = document.querySelector('.text__hashtags');
 const uploadImageCloseButtonElement = document.querySelector('#upload-cancel');
 
-function openForm () {
+const openForm = () => {
   uploadImageFormElement.classList.remove('hidden');
   onNoEffectChange();
   addDefaultScale();
   document.body.classList.add('modal-open');
-}
+};
 
-function closeForm () {
+const closeForm = () => {
   uploadImageFormElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadImageElement.value = '';
   uploadImageDescriptionElement.value ='';
   uploadImageHashtagsElement.value = '';
   document.removeEventListener('keydown', onFormEscKeydown);
-}
+};
 
 function onFormEscKeydown (evt) {
   if (uploadImageDescriptionElement === document.activeElement || uploadImageHashtagsElement === document.activeElement) {

@@ -25,25 +25,24 @@ sliderElement.noUiSlider.on('update', () => {
 
 sliderElement.classList.add('hidden');
 
-function deleteAllEffects () {
+const deleteAllEffects = () => {
   pictureElement.classList.remove('effects__preview--sepia');
   pictureElement.classList.remove('effects__preview--chrome');
   pictureElement.classList.remove('effects__preview--marvin');
   pictureElement.classList.remove('effects__preview--phobos');
   pictureElement.classList.remove('effects__preview--heat');
   pictureElement.classList.remove('effects__preview--none');
-}
+};
 
-function onNoEffectChange () {
+const onNoEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--none');
   sliderElement.classList.add('hidden');
   noEffectElement.checked = true;
-
   pictureElement.style.filter = '';
-}
+};
 
-function onChromeEffectChange () {
+const onChromeEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--chrome');
   sliderElement.classList.remove('hidden');
@@ -62,9 +61,9 @@ function onChromeEffectChange () {
     const valueElementValue = valueElement.value;
     pictureElement.style.filter = `grayscale(${valueElementValue})`;
   });
-}
+};
 
-function onSepiaEffectChange () {
+const onSepiaEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--sepia');
   sliderElement.classList.remove('hidden');
@@ -83,9 +82,9 @@ function onSepiaEffectChange () {
     const valueElementValue = valueElement.value;
     pictureElement.style.filter = `sepia(${valueElementValue})`;
   });
-}
+};
 
-function onMarvinEffectChange () {
+const onMarvinEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--marvin');
   sliderElement.classList.remove('hidden');
@@ -104,9 +103,9 @@ function onMarvinEffectChange () {
     const valueElementValue = valueElement.value;
     pictureElement.style.filter = `invert(${valueElementValue}%)`;
   });
-}
+};
 
-function onPhobosEffectChange() {
+const onPhobosEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--phobos');
   sliderElement.classList.remove('hidden');
@@ -125,9 +124,9 @@ function onPhobosEffectChange() {
     const valueElementValue = valueElement.value;
     pictureElement.style.filter = `blur(${valueElementValue}px)`;
   });
-}
+};
 
-function onHeatEffectChange () {
+const onHeatEffectChange = () => {
   deleteAllEffects();
   pictureElement.classList.add('effects__preview--heat');
   sliderElement.classList.remove('hidden');
@@ -146,7 +145,7 @@ function onHeatEffectChange () {
     const valueElementValue = valueElement.value;
     pictureElement.style.filter = `brightness(${valueElementValue})`;
   });
-}
+};
 
 chromeEffectElement.addEventListener('change', onChromeEffectChange);
 sepiaEffectElement.addEventListener('change', onSepiaEffectChange);

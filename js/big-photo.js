@@ -13,7 +13,15 @@ const bigPictureCommentsCounterElement = bigPictureElement.querySelector('.socia
 const bigPictureCommentsLoaderElement = bigPictureElement.querySelector('.social__comments-loader');
 const commentTemplateElement = document.querySelector('#social__comment').content.querySelector('.social__comment');
 
-function showBigPicture (url, likes, comments, description) {
+const renderComment = ({avatar, message, name}) => {
+  const commentElement = commentTemplateElement.cloneNode(true);
+  bigPictureCommentsListElement.appendChild(commentElement);
+  commentElement.querySelector('.social__text').textContent = message;
+  commentElement.querySelector('.social__picture').src = avatar;
+  commentElement.querySelector('.social__picture').alt = name;
+};
+
+const showBigPicture = (url, likes, comments, description) => {
   document.addEventListener('keydown', onBigPictureEscKeydown);
   bigPictureElement.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
@@ -53,23 +61,15 @@ function showBigPicture (url, likes, comments, description) {
       bigPictureCommentsCounterElement.textContent = `${comments.length} из ${comments.length} комментариев`;
     }
   });
-}
-
-function renderComment ({avatar, message, name}) {
-  const commentElement = commentTemplateElement.cloneNode(true);
-  bigPictureCommentsListElement.appendChild(commentElement);
-  commentElement.querySelector('.social__text').textContent = message;
-  commentElement.querySelector('.social__picture').src = avatar;
-  commentElement.querySelector('.social__picture').alt = name;
-}
+};
 
 // Закрытие большого изображения на кнопку или клавишу ESC
 
-function closeBigPicture () {
+const closeBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onBigPictureEscKeydown);
-}
+};
 
 function onBigPictureEscKeydown (evt) {
   if (isEscapeKey(evt)) {

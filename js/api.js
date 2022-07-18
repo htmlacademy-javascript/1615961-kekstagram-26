@@ -8,7 +8,7 @@ const ServerAddresses = {
   ADDRESS_POST_SERVER: 'https://26.javascript.pages.academy/kekstagram',
 };
 
-function getData (onSuccess) {
+const getData = (onSuccess) => {
   fetch(ServerAddresses.ADDRESS_GET_SERVER)
     .then((response) => response.json())
     .then((photos) => {
@@ -17,9 +17,9 @@ function getData (onSuccess) {
     .catch(() => {
       showAlert(ERROR_DOWNLOAD_MESSAGE);
     });
-}
+};
 
-function sendData (onSuccess, onFail, body) {
+const sendData = (onSuccess, onFail, body) => {
 
   fetch(ServerAddresses.ADDRESS_POST_SERVER,
     {
@@ -37,6 +37,6 @@ function sendData (onSuccess, onFail, body) {
     .catch(() => {
       onFail(ERROR_UPLOAD_MESSAGE);
     });
-}
+};
 
 export {getData, sendData};

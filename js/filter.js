@@ -1,42 +1,42 @@
 import {renderPhotos} from './miniatures.js';
 import {shuffle, debounce} from './utilites.js';
 
-function showImageFilters () {
+const showImageFilters = () => {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
-}
+};
 
-function clearOldPhotos () {
+const clearOldPhotos = () => {
   const picturesElements = document.querySelectorAll('.picture');
   picturesElements.forEach((pictureElement) => {
     pictureElement.remove();
   });
-}
+};
 
 const defaultFilterButtonElement = document.querySelector('#filter-default');
 const discussedFilterButtonElement = document.querySelector('#filter-discussed');
 const randomFilterButtonElement = document.querySelector('#filter-random');
 
-function filterByTopCommented (photos) {
+const filterByTopCommented = (photos) => {
   const sortedPhotos = photos.slice().sort((a, b) => b.comments.length - a.comments.length);
   renderPhotos(sortedPhotos);
-}
+};
 
-function filterByRandom (photos) {
+const filterByRandom = (photos) => {
   const sortedPhotos = shuffle(photos.slice()).slice(0, 10);
   renderPhotos(sortedPhotos);
-}
+};
 
-function filterByDefault (photos) {
+const filterByDefault = (photos) => {
   renderPhotos(photos);
-}
+};
 
-function deleteAllFilters () {
+const deleteAllFilters = () => {
   defaultFilterButtonElement.classList.remove('img-filters__button--active');
   randomFilterButtonElement.classList.remove('img-filters__button--active');
   discussedFilterButtonElement.classList.remove('img-filters__button--active');
-}
+};
 
-function addSortButtonListeners (photos) {
+const addSortButtonListeners = (photos) => {
 
   discussedFilterButtonElement.addEventListener('click', debounce(() => {
     clearOldPhotos();
@@ -64,6 +64,6 @@ function addSortButtonListeners (photos) {
     deleteAllFilters();
     defaultFilterButtonElement.classList.add('img-filters__button--active');
   });
-}
+};
 
 export {showImageFilters, addSortButtonListeners};
