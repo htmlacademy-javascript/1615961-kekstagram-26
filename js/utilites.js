@@ -12,7 +12,7 @@ const ERROR_MESSAGE_TOP_DISTANCE = '0';
 const ERROR_MESSAGE_RIGHT_DISTANCE = '0';
 
 
-function showAlert (message) {
+const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = ERROR_MESSAGE_Z_INDEX;
   alertContainer.style.position = ERROR_MESSAGE_POSITION;
@@ -31,32 +31,30 @@ function showAlert (message) {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
+};
 
 // Функция для проверки нажатия Esc.
 
-function isEscapeKey (evt) {
-  return evt.key === 'Escape';
-}
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 // Функция debounce для устранения дребезга.
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 // Функция тасовки массива
 
-function shuffle(photos) {
+const shuffle = (photos) => {
   for (let i = photos.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [photos[i], photos[j]] = [photos[j], photos[i]];
   }
   return photos;
-}
+};
 
 export {isEscapeKey, showAlert, debounce, shuffle};

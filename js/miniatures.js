@@ -3,7 +3,7 @@ import {showBigPicture} from './big-photo.js';
 const containerPhotosElement = document.querySelector('.pictures');
 const similarPhotoTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 
-function renderPhotos (photos) {
+const renderPhotos = (photos) => {
   photos.forEach(({url, likes, comments, description}) => {
     const photoElement = similarPhotoTemplateElement.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
@@ -14,6 +14,6 @@ function renderPhotos (photos) {
     photoElement.addEventListener('click',() => {showBigPicture(url, likes, comments, description);
     });
   });
-}
+};
 
 export {renderPhotos};

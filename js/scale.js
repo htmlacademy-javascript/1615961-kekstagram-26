@@ -7,26 +7,26 @@ const scalePlusButtonElement = document.querySelector('.scale__control--bigger')
 const scaleFieldElement = document.querySelector('.scale__control--value');
 const pictureElement = document.querySelector('.img-upload__preview-picture');
 
-function onScalePlusButtonclick () {
+const onScalePlusButtonclick = () => {
   if (parseInt(scaleFieldElement.value, 10) < MAX_CHANGED_SCALE) {
     scaleFieldElement.value = `${(parseInt(scaleFieldElement.value, 10) + STEP_SCALE_ON_CLICK)}%`;
     pictureElement.style.transform = `scale(${parseInt(scaleFieldElement.value, 10) / 100})`;
     return scaleFieldElement.value;
   }
-}
+};
 
-function onScaleMinusButtonclick () {
+const onScaleMinusButtonclick = () => {
   if (parseInt(scaleFieldElement.value, 10) > MIN_CHANGED_SCALE) {
     scaleFieldElement.value = `${(parseInt(scaleFieldElement.value, 10) - STEP_SCALE_ON_CLICK)}%`;
     pictureElement.style.transform = `scale(${parseInt(scaleFieldElement.value, 10) / 100})`;
     return scaleFieldElement.value;
   }
-}
+};
 
-function addDefaultScale () {
+const addDefaultScale = () => {
   scaleFieldElement.value = '100%';
   pictureElement.style.transform = 'scale(1)';
-}
+};
 
 scalePlusButtonElement.addEventListener ('click', onScalePlusButtonclick);
 scaleMinusButtonElement.addEventListener ('click', onScaleMinusButtonclick);
