@@ -2,7 +2,7 @@ import {isEscapeKey, showAlert} from './utilites.js';
 import {sendData} from './api.js';
 import {onFormEscKeydown} from './user-form.js';
 
-const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,100}$/;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_QUANTITY = 5;
 
@@ -11,7 +11,7 @@ const formElement = document.querySelector('.img-upload__form');
 const pristine = new Pristine(formElement, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'error-text',
+  errorTextClass: 'img-upload__error-text',
 });
 
 // Валидация хэштегов
@@ -21,17 +21,8 @@ const hashtagsFieldElement = document.querySelector('.text__hashtags');
 function validateHashtagValue (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (RE.test(arrayElement) || arrayElement === '') {
-      return true;
-    }
-  } return false;
-}
-
-function validateSpaceBeforeHashtag (value) {
-  const array = value.split('');
-  for (let i = 2; i < array.length - 1; i++) {
-    if (array[i] === ' ') {
-      return array[i + 1] === '#';
+    if (!RE.test(arrayElement) && arrayElement !== '') {
+      return false;
     }
   }
   return true;
@@ -39,19 +30,19 @@ function validateSpaceBeforeHashtag (value) {
 
 function validateFirstSpace (value) {
   const array = value.split('');
-  if (array[0] === ' ') {
-    return false;
+  if (array[0] !== ' ' || array[0] === '') {
+    return true;
   }
-  return true;
+  return false;
 }
 
 function validateHashtagLength (value) {
   const array = value.split(' ');
   for (const arrayElement of array) {
-    if (arrayElement.length <= MAX_HASHTAG_LENGTH) {
-      return true;
+    if (arrayElement.length > MAX_HASHTAG_LENGTH) {
+      return false;
     }
-  } return false;
+  } return true;
 }
 
 function validateHashtagsQuantity (value) {
@@ -61,7 +52,7 @@ function validateHashtagsQuantity (value) {
 
 function validateNotSameHashtags (value) {
   const array = value.split(' ');
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length - 1; i++) {
     for (let j = i + 1; j < array.length; j++) {
       if (array[i] === array[j]) {
         return false;
@@ -72,7 +63,7 @@ function validateNotSameHashtags (value) {
 
 function validateNotSameInLowerCase (value) {
   const array = value.split(' ');
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length - 1; i++) {
     for (let j = i + 1; j < array.length; j++) {
       if (array[i].toLowerCase() === array[j].toLowerCase()) {
         return false;
@@ -81,13 +72,12 @@ function validateNotSameInLowerCase (value) {
   } return true;
 }
 
-pristine.addValidator(hashtagsFieldElement, validateHashtagLength, 'максимальная длина одного хэш-тега 20 символов, включая решётку');
-pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, 'нельзя указать больше пяти хэш-тегов');
-pristine.addValidator(hashtagsFieldElement, validateSpaceBeforeHashtag, 'хэш-тег начинается с символа # (решётка)');
-pristine.addValidator(hashtagsFieldElement, validateFirstSpace, 'пробел перед первым хэштегом не допускается');
-pristine.addValidator(hashtagsFieldElement, validateHashtagValue, 'хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
-pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, 'один и тот же хэш-тег не может быть использован дважды');
-pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, 'хэш-теги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом');
+pristine.addValidator(hashtagsFieldElement, validateHashtagLength, 'Максимальная длина одного хэш-тега 20 символов, включая решётку');
+pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, 'Нельзя указать больше пяти хэш-тегов');
+pristine.addValidator(hashtagsFieldElement, validateFirstSpace, 'Пробел перед первым хэштегом не допускается');
+pristine.addValidator(hashtagsFieldElement, validateHashtagValue, 'Хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
+pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, 'Один и тот же хэш-тег не может быть использован дважды');
+pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, 'Хэш-теги нечувствительны к регистру');
 
 // Отправка формы
 
