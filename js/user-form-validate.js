@@ -2,7 +2,7 @@ import {isEscapeKey, showAlert} from './utilites.js';
 import {sendData} from './api.js';
 import {onFormEscKeydown} from './user-form.js';
 
-const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,100}$/;
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,30}$/;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_QUANTITY = 5;
 
@@ -129,24 +129,24 @@ const successCloseButtonElement = successTemplateElement.querySelector('.success
 function onSuccessMessageEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeSuccessMessage();
+    onSuccessMessageDoClose();
   }
 }
 
 function onSuccesMessageClickAround (evt) {
   if (evt.target === successTemplateElement) {
-    closeSuccessMessage();
+    onSuccessMessageDoClose();
   }
 }
 
 function openSuccessMessage () {
   document.body.appendChild(successTemplateElement);
   document.addEventListener('keydown', onSuccessMessageEscKeydown);
-  successCloseButtonElement.addEventListener('click', closeSuccessMessage);
+  successCloseButtonElement.addEventListener('click', onSuccessMessageDoClose);
   document.addEventListener('click', onSuccesMessageClickAround);
 }
 
-function closeSuccessMessage() {
+function onSuccessMessageDoClose() {
   document.body.removeChild(successTemplateElement);
   document.removeEventListener('keydown', onSuccessMessageEscKeydown);
   document.removeEventListener('click', onSuccesMessageClickAround);
@@ -160,26 +160,26 @@ const errorCloseButtonElement = errorTemplateElement.querySelector('.error__butt
 function onErrorMessageEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeErrorMessage();
+    onErrorMessageDoClose();
   }
 }
 
 function onErrorMessageClickAround (evt) {
   if (evt.target === errorTemplateElement) {
-    closeErrorMessage();
+    onErrorMessageDoClose();
   }
 }
 
 function openErrorMessage () {
   document.body.appendChild(errorTemplateElement);
   document.addEventListener('keydown', onErrorMessageEscKeydown);
-  errorCloseButtonElement.addEventListener('click', closeErrorMessage);
+  errorCloseButtonElement.addEventListener('click', onErrorMessageDoClose);
   errorTemplateElement.style.zIndex =  '100';
   document.addEventListener('click', onErrorMessageClickAround);
   document.removeEventListener('keydown', onFormEscKeydown);
 }
 
-function closeErrorMessage() {
+function onErrorMessageDoClose() {
   document.body.removeChild(errorTemplateElement);
   document.removeEventListener('keydown', onErrorMessageEscKeydown);
   document.removeEventListener('click', onErrorMessageClickAround);
