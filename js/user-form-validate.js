@@ -6,6 +6,13 @@ const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,30}$/;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAG_QUANTITY = 5;
 
+const HASHTAG_LENGTH_ERROR_TEXT = 'Максимальная длина одного хэш-тега 20 символов, включая решётку';
+const HASHTAG_QUANTITY_ERROR_TEXT = 'Нельзя указать больше пяти хэш-тегов';
+const HASHTAG_FIRST_SPACE_ERROR_TEXT = 'Пробел перед первым хэштегом не допускается';
+const HASHTAG_VALUE_ERROR_TEXT = 'Хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки';
+const HASHTAH_NOT_SAME_ERROR_TEXT = 'Один и тот же хэш-тег не может быть использован дважды';
+const HASHTAG_REGISTER_ERROR_TEXT = 'Хэш-теги нечувствительны к регистру';
+
 const formElement = document.querySelector('.img-upload__form');
 
 const pristine = new Pristine(formElement, {
@@ -72,12 +79,12 @@ function validateNotSameInLowerCase (value) {
   } return true;
 }
 
-pristine.addValidator(hashtagsFieldElement, validateHashtagLength, 'Максимальная длина одного хэш-тега 20 символов, включая решётку');
-pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, 'Нельзя указать больше пяти хэш-тегов');
-pristine.addValidator(hashtagsFieldElement, validateFirstSpace, 'Пробел перед первым хэштегом не допускается');
-pristine.addValidator(hashtagsFieldElement, validateHashtagValue, 'Хэш-тег начинается с символа # (решётка), строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д., хеш-тег не может состоять только из одной решётки');
-pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, 'Один и тот же хэш-тег не может быть использован дважды');
-pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, 'Хэш-теги нечувствительны к регистру');
+pristine.addValidator(hashtagsFieldElement, validateHashtagLength, HASHTAG_LENGTH_ERROR_TEXT);
+pristine.addValidator(hashtagsFieldElement, validateHashtagsQuantity, HASHTAG_QUANTITY_ERROR_TEXT);
+pristine.addValidator(hashtagsFieldElement, validateFirstSpace, HASHTAG_FIRST_SPACE_ERROR_TEXT);
+pristine.addValidator(hashtagsFieldElement, validateHashtagValue, HASHTAG_VALUE_ERROR_TEXT);
+pristine.addValidator(hashtagsFieldElement, validateNotSameHashtags, HASHTAH_NOT_SAME_ERROR_TEXT);
+pristine.addValidator(hashtagsFieldElement, validateNotSameInLowerCase, HASHTAG_REGISTER_ERROR_TEXT);
 
 // Отправка формы
 

@@ -1,5 +1,8 @@
 import {showAlert} from './utilites.js';
 
+const ERROR_DOWNLOAD_MESSAGE = 'Не удалось получить данные с сервера. Попробуйте ещё раз';
+const ERROR_UPLOAD_MESSAGE = 'Не удалось отправить форму. Попробуйте ещё раз';
+
 const ServerAddresses = {
   ADDRESS_GET_SERVER: 'https://26.javascript.pages.academy/kekstagram/data',
   ADDRESS_POST_SERVER: 'https://26.javascript.pages.academy/kekstagram',
@@ -12,7 +15,7 @@ function getData (onSuccess) {
       onSuccess(photos);
     })
     .catch(() => {
-      showAlert('Не удалось получить данные с сервера. Попробуйте ещё раз');
+      showAlert(ERROR_DOWNLOAD_MESSAGE);
     });
 }
 
@@ -28,11 +31,11 @@ function sendData (onSuccess, onFail, body) {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail(ERROR_UPLOAD_MESSAGE);
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail(ERROR_UPLOAD_MESSAGE);
     });
 }
 
