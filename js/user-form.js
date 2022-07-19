@@ -2,7 +2,7 @@ import {isEscapeKey} from './utilites.js';
 import {onNoEffectChange} from './photo-effects.js';
 import {addDefaultScale} from './scale.js';
 
-const FILE_TYPES = ['jpg', 'jpeg', 'png', 'avif'];
+const EXTENSIONS = ['jpg', 'jpeg', 'png', 'avif'];
 
 const uploadImageElement = document.querySelector('#upload-file');
 const uploadImageFormElement = document.querySelector('.img-upload__overlay');
@@ -54,7 +54,7 @@ fileChooserElement.addEventListener('change', () => {
   const file = fileChooserElement.files[0];
   const fileName = file.name.toLowerCase();
 
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = EXTENSIONS.some((it) => fileName.endsWith(it));
 
   if (matches) {
     previewPhotoElement.src = URL.createObjectURL(file);
