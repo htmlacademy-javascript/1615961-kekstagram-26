@@ -1,6 +1,11 @@
 import {renderPhotos} from './miniatures.js';
 import {shuffle, debounce} from './utilites.js';
 
+const filterFormElement = document.querySelector('.img-filters__form');
+const defaultFilterButtonElement = filterFormElement.querySelector('#filter-default');
+const discussedFilterButtonElement = filterFormElement.querySelector('#filter-discussed');
+const randomFilterButtonElement = filterFormElement.querySelector('#filter-random');
+
 const showImageFilters = () => {
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
@@ -11,10 +16,6 @@ const clearOldPhotos = () => {
     pictureElement.remove();
   });
 };
-
-const defaultFilterButtonElement = document.querySelector('#filter-default');
-const discussedFilterButtonElement = document.querySelector('#filter-discussed');
-const randomFilterButtonElement = document.querySelector('#filter-random');
 
 const filterByTopCommented = (photos) => {
   const sortedPhotos = photos.slice().sort((a, b) => b.comments.length - a.comments.length);
@@ -37,33 +38,35 @@ const deleteAllFilters = () => {
 };
 
 const addSortButtonListeners = (photos) => {
-
-  discussedFilterButtonElement.addEventListener('click', debounce(() => {
+  filterFormElement.addEventListener('click', debounce((evt) => {
     clearOldPhotos();
-    filterByTopCommented(photos);
-  }));
-  discussedFilterButtonElement.addEventListener('click', () => {
-    deleteAllFilters();
-    discussedFilterButtonElement.classList.add('img-filters__button--active');
-  });
+    if (defaultFilterButtonElement === evt.target) {
+      filterByDefault(photos);
+    }
 
-  randomFilterButtonElement.addEventListener('click', debounce(() => {
-    clearOldPhotos();
-    filterByRandom(photos);
-  }));
-  randomFilterButtonElement.addEventListener('click', () => {
-    deleteAllFilters();
-    randomFilterButtonElement.classList.add('img-filters__button--active');
-  });
+    if (randomFilterButtonElement === evt.target) {
+      filterByRandom(photos);
+    }
 
-  defaultFilterButtonElement.addEventListener('click', debounce(() => {
-    clearOldPhotos();
-    filterByDefault(photos);
+    if (discussedFilterButtonElement === evt.target) {
+      filterByTopCommented(photos);
+    }
   }));
-  defaultFilterButtonElement.addEventListener('click', () => {
-    deleteAllFilters();
-    defaultFilterButtonElement.classList.add('img-filters__button--active');
-  });
 };
+
+discussedFilterButtonElement.addEventListener('click', () => {
+  deleteAllFilters();
+  discussedFilterButtonElement.classList.add('img-filters__button--active');
+});
+
+randomFilterButtonElement.addEventListener('click', () => {
+  deleteAllFilters();
+  randomFilterButtonElement.classList.add('img-filters__button--active');
+});
+
+defaultFilterButtonElement.addEventListener('click', () => {
+  deleteAllFilters();
+  defaultFilterButtonElement.classList.add('img-filters__button--active');
+});
 
 export {showImageFilters, addSortButtonListeners};
